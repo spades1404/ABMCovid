@@ -1,0 +1,8 @@
+This is a place for random ideas that i think of that could improve the script
+
+1. Different movement modes, e.g complete randomness, or directed home-to-work movement
+2. Cells to represent a hospital where the odds of recovery are higher, hospitals can have capacities
+3. Maybe consider that people can be in the same cell, where they are very close so odds are higher
+4. There should be a decicded scale for distances, so we can emulate the distancing rule.
+5. There should be randomized stats for an agent that increases/decreses risk. E.g an agent can have a random weight (maybe that follows national stats) and that relates to their risk to covid
+6. There are numerous human traits we could take into account, such as if they wear a mask, if they choose not to go outside, or if they are very active outside
