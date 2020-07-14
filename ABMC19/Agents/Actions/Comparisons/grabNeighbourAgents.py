@@ -1,8 +1,9 @@
 def grabNeighboursAgents(agent,mooreOn):
     #lets get nearby coordinates first
-    cells = agent.model.grid.get_neighbourhood(agent.pos,
+    cells = agent.model.grid.get_neighborhood(agent.pos,
                                        moore=mooreOn,
                                        include_center=False)
+    print(cells)
 
     #then lets transform that into a list of agents
     agents = []
