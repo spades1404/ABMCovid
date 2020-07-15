@@ -16,16 +16,19 @@ def selfCheck(agent):
         agentProbability = tsi/28 * random.uniform(0.5,1.5) #probability of an event happening on this day
         if agentProbability > 0.5:
             lifeORdeath = random.uniform(0,1)
-            #going to say there is a 10 percent chance you die
-            if lifeORdeath > 0.1 :
-                agent.progression = 3
+            #going to say there is a 50 percent chance you die
+            if lifeORdeath > 0.5 :
                 agent.infected = False
                 agent.immune = True # may make this random
                 agent.model.immune += 1
+
             else:
-                agent.progression = 3
                 agent.dead = True
                 agent.model.deaths += 1
                 removeAgentFromModel(agent)
+
+            agent.progression = 3
+            agent.model.infected -= 1  # going to decrement the infection counter
+
 
 

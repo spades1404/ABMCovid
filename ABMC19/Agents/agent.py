@@ -38,6 +38,5 @@ class covAgent(Agent):
         selfCheck(self)
         #then we will do our pathfinding
         moveAgent(self)
-        print("Done!")
 
         return

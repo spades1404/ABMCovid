@@ -22,3 +22,7 @@ def moveAgent(agent):
         return
     else:
         agent.model.grid.move_agent(agent,filteredMoves[0]) #move to the first availiable spot
+        if filteredMoves[0] == agent.workCoord:
+            agent.movementDir = 1
+        elif filteredMoves[0] == agent.homeCoord:
+            agent.movementDir = 0
