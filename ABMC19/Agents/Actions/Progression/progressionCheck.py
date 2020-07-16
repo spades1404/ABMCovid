@@ -3,57 +3,25 @@ from ABMC19.Agents.Actions.Progression.removeAgentFromModel import removeAgentFr
 
 def selfCheck(agent):
     tsi = agent.ticksSinceInfection
-
     if agent.infected == True:
         agent.ticksSinceInfection += 1
-
     if agent.progression == 1:
-        agentProbability = tsi/14 * random.uniform(1,1.5) #converting into a decimal for randomness, odds get higher over days, will definetly do some proper statistics later
-        if agentProbability> 0.5:
-            agent.progression = 2 #they are now symptomatic
-
-    elif agent.progression == 2:
-        agentProbability = tsi/28 * random.uniform(1,1.5) #probability of an event happening on this day
-        if agentProbability > 0.5:
-
-            agent.progression = 3
-            agent.model.infected -= 1  # going to decrement the infection counter
-
-            lifeORdeath = random.uniform(0,1)
-            #going to say there is a 50 percent chance you die
-            if lifeORdeath > 0.5 :
-                agent.immune = True # may make this random
-                agent.model.immune += 1
-
-            else:
-                agent.dead = True
-                agent.model.deaths += 1
-                removeAgentFromModel(agent)
-
-def selfCheck2(agent):
-    tsi = agent.ticksSinceInfection
-    if agent.infected == True:
-        agent.ticksSinceInfection += 1
-
-    if agent.progression == 1:
-        if tsi == 14:
+        if ((tsi/14)*random.uniform(0.8,1.2)) >= 1:  #this line uses a specific decimal. Its setup so any day 12+ has a chance of an event happening.
             agent.progression = 2
+        else:
+            return
     elif agent.progression == 2:
-        if tsi == 21:
+        if ((tsi/21)*random.uniform(0.7,1.3)) >= 1: #simmilar line to above - its active between 17-28 days. I choose 21 days as the median to base this off
             agent.progression = 3
             agent.model.infected -= 1
-            x = bool(random.getrandbits(1))
+            x = bool(random.getrandbits(1)) #going to say its 50/50 that the
 
-            if x == True:
+            cfr = random.uniform(0,1) #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
+
+            if cfr < 0.05: #5% of cases will die
                 agent.model.deaths += 1
                 agent.dead = True
+                removeAgentFromModel(agent)
             else:
-                agent.model.immune+=1
+                agent.model.immune += 1
                 agent.immune = True
-
-
-def newselfCheck(agent):
-    tsi = agent.ticksSinceInfection
-    if agent.infected == True:
-        agent.ticksSinceInfection += 1
-    #if agent.progression =
