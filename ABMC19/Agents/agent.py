@@ -1,6 +1,6 @@
 from mesa import Agent
 from ABMC19.Agents.Actions.Comparisons.covidComparison import covidCompare
-from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
+from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck2
 from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
 class covAgent(Agent):
     def __init__(self,unique_id,model,homeCoord,workCoord,infectedOnSpawn):
@@ -35,7 +35,7 @@ class covAgent(Agent):
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same
         covidCompare(self)
         #then we will self check the progression of our disease
-        selfCheck(self)
+        selfCheck2(self)
         #then we will do our pathfinding
         moveAgent(self)
 

@@ -12,10 +12,12 @@ def agentPortrayal(agent):
     }
 
     #maybe a switch statment here?
-    if agent.progression == 0:
+    if agent.infected == False:
         portrayal["Color"] = "green"
-    elif agent.infected == True and agent.dead == False:
+    elif agent.infected == True and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "red"
+    #elif agent.infected == True and agent.dead == False and agent.progression == 2:
+    #    portrayal["Color"] = "red"
     elif agent.dead == True:
         return
     elif agent.immune == True:

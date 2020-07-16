@@ -10,7 +10,7 @@ from ABMC19.Model.coordinateScripts.generateSpecialAreas import *
 
 class covidModel(Model):
 
-    def __init__(self, numAgents,gridWidth,gridHeight,startingInfected):
+    def __init__(self,gridWidth,gridHeight,numAgents,startingInfected):
 
         self.gridWidth = gridWidth
         self.gridHeight = gridHeight
@@ -21,10 +21,10 @@ class covidModel(Model):
 
 
         #trackers
-        self.deaths = 0
-        self.infected = startingInfected
+        self.deaths = 0 #will show total deaths
+        self.infected = startingInfected #will show number of infected agents for one tick
         # self.cured = 0 #this will only matter if the immunity is random
-        self.immune = 0
+        self.immune = 0 #will show total immune ppl
 
         #For visualisation
         self.running = True
@@ -47,6 +47,7 @@ class covidModel(Model):
         #Generating Agents
 
         for i in range(numAgents):
+
             #rudimentary way to do the starting num of infected agents
             if i <startingInfected :
                 infectedAgent = True
