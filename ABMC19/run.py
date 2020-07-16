@@ -2,6 +2,7 @@ from ABMC19.Model.model import *
 from ABMC19.GUI.gui import *
 from ABMC19.Visualisation.visualisation import *
 
+#if you want gui setup
 #mainWin()
 
 #Uncomment this for manual use with no GUI
@@ -10,4 +11,5 @@ from ABMC19.Visualisation.visualisation import *
 #while model.running == True:
 #    model.step()
 
-startVisuals(100,100,200,1)
+#just visuals
+startVisuals(100,100,200,1) # gridx,gridy,num agents, num infected
