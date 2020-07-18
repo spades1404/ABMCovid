@@ -10,6 +10,7 @@ class covAgent(Agent):
         self.dead = False
         self.infected = False
         self.immune = False
+        self.obese = False
         self.ticksSinceInfection = 0 #i will say each tick is a day, this is only activated once the agent is infected
 
         #disease progression

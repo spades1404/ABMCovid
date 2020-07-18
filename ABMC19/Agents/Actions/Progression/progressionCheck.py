@@ -2,6 +2,9 @@ import random
 from ABMC19.Agents.Actions.Progression.removeAgentFromModel import removeAgentFromModel
 
 def selfCheck(agent):
+    bmi = random.normalvariate(27.5,7.5) # Normal distribution with mean as 27.5 and abritary standard deviation from (mean - potentially fatal bmi)
+    if bmi > 35:
+        agent.obese = True
     tsi = agent.ticksSinceInfection
     if agent.infected == True:
         agent.ticksSinceInfection += 1
@@ -18,7 +21,7 @@ def selfCheck(agent):
 
             cfr = random.uniform(0,1) #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
 
-            if cfr < 0.05: #5% of cases will die
+            if cfr < 0.05 or (cfr < 0.11 and agent.obese == True): #5% of cases will die or if agent is obese 11% will die
                 agent.model.deaths += 1
                 agent.dead = True
                 removeAgentFromModel(agent)
