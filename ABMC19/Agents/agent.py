@@ -2,6 +2,8 @@ from mesa import Agent
 from ABMC19.Agents.Actions.Comparisons.covidComparison import covidCompare
 from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
 from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
+from ABMC19.Agents.characteristics import *
+
 class covAgent(Agent):
     def __init__(self,unique_id,model,homeCoord,workCoord,infectedOnSpawn):
         super().__init__(unique_id,model)
@@ -29,6 +31,11 @@ class covAgent(Agent):
         if infectedOnSpawn == True:
             self.infected = True
             self.progression = 1
+
+        #agent characteristic
+        self.obese = obesityDef() #either true or false
+
+
 
 
     def step(self):
