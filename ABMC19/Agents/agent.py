@@ -24,7 +24,7 @@ class covAgent(Agent):
         self.workCoord = workCoord
 
         #A variable to track their current movement plan
-        self.movementDir = 0
+        self.movementDir = 1 # As work is the starting Coord, movementDir is set so the agent is initially moving to home Coord
         #I will set 0 to be home->work and 1 to be work->home, using numbers so in the future I can add more paths
 
         #Here im adding a check to see if this agent is infected on spawn
@@ -34,9 +34,8 @@ class covAgent(Agent):
 
         #agent characteristic
         self.obese = obesityDef() #either true or false
-
-
-
+        self.cleanly = hygieneDef()
+        self.distanced = distanceDef() # This can be commented to remove social distancing
 
     def step(self):
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same

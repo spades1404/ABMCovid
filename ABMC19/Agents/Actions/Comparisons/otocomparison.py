@@ -6,6 +6,8 @@ def onetoonecomparison(primaryAgent,secondaryAgent):
 
     #going to say its a coinflip wheter they are infected or not, can be changed
     outcome = random.uniform(0,1)
+    if primaryAgent.cleanly == True:
+        outcome -= 0.33 # Reduce infection rate by 33% if masked
 
     if outcome > 0.2 and primaryAgent.immune == False:
         primaryAgent.infected = True
