@@ -34,8 +34,9 @@ class covAgent(Agent):
 
         #agent characteristic
         self.obese = obesityDef() #either true or false
-        self.cleanly = hygieneDef()
+        self.cleanly = hygieneDef() #Washing hands, wearing masks
         self.distanced = distanceDef() # This can be commented to remove social distancing
+        #Lets say being distance reduces the chances of you catching the disease, and wearing a mask reduces the chances that you spread the disease
 
     def step(self):
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same

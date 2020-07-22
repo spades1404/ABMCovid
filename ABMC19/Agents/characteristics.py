@@ -18,4 +18,5 @@ def distanceDef():
         return True
     else:
         return False
+
 #we can add more characteristic checks here (like other pre existing conditions
