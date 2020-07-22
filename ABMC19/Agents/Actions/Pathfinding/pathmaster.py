@@ -7,8 +7,8 @@ def moveAgent(agent):
     #then we will move accordingly
     #then we will check what cell we are at in case the path position changes
 
-    if agent.distanced == True: # If the agent is social distancing, remain stationary
-        return
+    #if agent.distanced == True: # If the agent is social distancing, remain stationary
+    #    return
 
     neighbours = grabNeighbouringCells(agent,True) #getting neighbours
     destinationCoord = ()
