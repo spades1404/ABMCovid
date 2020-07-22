@@ -18,10 +18,8 @@ def generateSpecialCoordinates(model):
     pairedCoord = []
     #going to package them as a list of lists. Where each value is [workplacecoord , homecoord]
 
-    for i, k in zip(listOfCoords[0::2], listOfCoords[1::2]):
-        pairedCoord.append([i,k])
-
-    return(pairedCoord)
+    pairedCoord = [[i, k] for i, k in zip(listOfCoords[0::2],listOfCoords[1::2])]
+    return pairedCoord
 
 
 

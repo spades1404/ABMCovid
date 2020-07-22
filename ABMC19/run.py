@@ -12,4 +12,4 @@ from ABMC19.Visualisation.visualisation import *
 #    model.step()
 
 #just visuals
-startVisuals(100,100,200,1) # gridx,gridy,num agents, num infected
+startVisuals(100,100,200,5) # gridx,gridy,num agents, num infected
