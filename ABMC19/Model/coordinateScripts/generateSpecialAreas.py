@@ -15,7 +15,6 @@ def generateSpecialCoordinates(model):
     while len(listOfCoords) < numOfCoords:
         listOfCoords.add((random.choice(randintsX),random.choice(randintsY)))
     listOfCoords = list(listOfCoords)
-    pairedCoord = []
     #going to package them as a list of lists. Where each value is [workplacecoord , homecoord]
 
     pairedCoord = [[i, k] for i, k in zip(listOfCoords[0::2],listOfCoords[1::2])]
