@@ -6,10 +6,4 @@ def grabNeighboursAgents(agent,mooreOn):
 
 
     #then lets transform that into a list of agents
-    agents = []
-
-    for i in cells:
-        agents += agent.model.grid.get_cell_list_contents([i])
-
-
-    return agents
+    return [k for i in cells for k in agent.model.grid.get_cell_list_contents([i])]

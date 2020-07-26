@@ -15,10 +15,15 @@ def generateSpecialCoordinates(model):
     while len(listOfCoords) < numOfCoords:
         listOfCoords.add((random.choice(randintsX),random.choice(randintsY)))
     listOfCoords = list(listOfCoords)
-    #going to package them as a list of lists. Where each value is [workplacecoord , homecoord]
+    #going to package them as a list of lists. Where each value is [(workplacecoord), (homecoord), (hubcoord)]
 
-    pairedCoord = [[i, k] for i, k in zip(listOfCoords[0::2],listOfCoords[1::2])]
-    return pairedCoord
+    pairedCoords = [[i, k] for i, k in zip(listOfCoords[0::2],listOfCoords[1::2])]
+
+    # Adding a common coordinate for agents to move to in listOfCoords
+    for Coord in pairedCoords:
+        Coord.append(listOfCoords[numOfCoords//2])  # hubCoord will take the middle element in listOfCoords
+
+    return pairedCoords
 
 
 

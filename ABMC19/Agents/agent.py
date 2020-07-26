@@ -5,7 +5,7 @@ from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
 from ABMC19.Agents.characteristics import *
 
 class covAgent(Agent):
-    def __init__(self,unique_id,model,homeCoord,workCoord,infectedOnSpawn):
+    def __init__(self,unique_id,model,homeCoord,workCoord,hubCoord,infectedOnSpawn):
         super().__init__(unique_id,model)
 
         #person covid status
@@ -22,6 +22,7 @@ class covAgent(Agent):
         #Coordinates of the agents workplace and homeplace
         self.homeCoord = homeCoord
         self.workCoord = workCoord
+        self.hubCoord = hubCoord
 
         #A variable to track their current movement plan
         self.movementDir = 1 # As work is the starting Coord, movementDir is set so the agent is initially moving to home Coord

@@ -10,12 +10,12 @@ def onetoonecomparison(primaryAgent,secondaryAgent):
     #going to say its a coinflip wheter they are infected or not, can be changed
     outcome = random.uniform(0,1)
     if secondaryAgent.cleanly == True:
-        outcome -= 1 # Im going to say if the other agents prevents themselves from preventing the disease then the chances of getting it is reduced 100%
+        outcome -= 0.50 # If the agent is hygienic they less likely to become infected by %
 
     if primaryAgent.distanced == True:
-        outcome -= 0.75 # lets say being distanced reduces chances by 75%
+        outcome -= 0.65 # lets say being distanced reduces chances by %
 
-    if outcome > 0.2 and primaryAgent.immune == False:
+    if outcome > 0.2 and primaryAgent.immune == False: # base of 80% are infected
         primaryAgent.infected = True
         primaryAgent.progression = 1
         primaryAgent.model.infected += 1
