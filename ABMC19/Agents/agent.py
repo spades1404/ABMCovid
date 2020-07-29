@@ -2,7 +2,7 @@ from mesa import Agent
 from ABMC19.Agents.Actions.Comparisons.covidComparison import covidCompare
 from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
 from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
-from ABMC19.Agents.characteristics import *
+from ABMC19.Agents.characteristics import obesityDef, hygieneDef, distanceDef 
 
 class covAgent(Agent):
     def __init__(self,unique_id,model,homeCoord,workCoord,hubCoord,infectedOnSpawn):
@@ -36,8 +36,7 @@ class covAgent(Agent):
         #agent characteristic
         self.obese = obesityDef() #either true or false
         self.cleanly = hygieneDef() #Washing hands, wearing masks
-        self.distanced = distanceDef() # This can be commented to remove social distancing
-        #Lets say being distance reduces the chances of you catching the disease, and wearing a mask reduces the chances that you spread the disease
+        self.distanced = distanceDef() #This can be commented to remove social distancing
 
     def step(self):
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same

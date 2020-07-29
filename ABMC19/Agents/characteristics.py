@@ -8,21 +8,25 @@ def obesityDef():
         return False
 
 def hygieneDef():
-    if random.random() < 0.65: # Percentage of people wear a mask/handwash regularly
+    if random.random() < 0.6: # Percentage of people wear a mask/handwash regularly
         return True
     else:
         return False
 
 def distanceDef():
-    if random.random() < 0.4:  # Percentage of people obey social distancing
+    if random.random() < 0.43:  # Percentage of people obey social distancing
         return True
     else:
         return False
 
 def hubDef():
-    if random.random() < 0.75:   # Percentage of people going to work/hub
+    if random.random() < 0.81:   # Percentage of people going to work instead of a hub
         return 0    # Movement home->work
     else:
         return 2    # Movement home->hub
 
-#we can add more characteristic checks here (like other pre existing conditions
+def reinfectDef():
+    if random.random() < 0.005: #Percentage of people getting reinfected (very low because it is unlikely)
+        return True
+
+#we can add more characteristic checks here (like other pre existing conditions)

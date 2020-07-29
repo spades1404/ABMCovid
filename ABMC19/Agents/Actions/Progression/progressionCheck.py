@@ -1,5 +1,6 @@
 import random
 from ABMC19.Agents.Actions.Progression.removeAgentFromModel import removeAgentFromModel
+from ABMC19.Agents.characteristics import reinfectDef
 
 def selfCheck(agent):
     tsi = agent.ticksSinceInfection
@@ -19,12 +20,20 @@ def selfCheck(agent):
             cfr = random.uniform(0,1) #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
 
             if agent.obese == True:
-                cfr += 0.2 #lets say it adds a 20% risk of death
+                cfr += 0.25 #adds a % risk of death
 
-            if cfr > 0.95: #5% chance of death
+            if cfr > 0.93: #~7% chance of death
                 agent.model.deaths += 1
                 agent.dead = True
                 removeAgentFromModel(agent)
             else:
                 agent.model.immune += 1
                 agent.immune = True
+
+    elif agent.progression == 3: #After agent becomes immune
+        if random.uniform(0.6,1.4) >= 1: #Chance of reinfection
+            if reinfectDef() == True:
+                agent.immune = False #Agent becomes infected (True) or not (False)
+                agent.model.immune -= 1 #Remove their value from datacollector
+                agent.infected = False #Reset agent's infected and progression status
+                agent.progression = 0

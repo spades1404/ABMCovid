@@ -12,7 +12,9 @@ def agentPortrayal(agent):
     }
 
     #maybe a switch statment here?
-    if agent.infected == False:
+    if agent.pos == agent.hubCoord:
+        portrayal["Color"] = "blue"
+    elif agent.infected == False:
         portrayal["Color"] = "green"
     elif agent.infected == True and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "red"

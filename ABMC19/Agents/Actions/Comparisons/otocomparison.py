@@ -13,9 +13,9 @@ def onetoonecomparison(primaryAgent,secondaryAgent):
         outcome -= 0.50 # If the agent is hygienic they less likely to become infected by %
 
     if primaryAgent.distanced == True:
-        outcome -= 0.65 # lets say being distanced reduces chances by %
+        outcome -= 0.61 #being distanced reduces chances of infection by %
 
-    if outcome > 0.2 and primaryAgent.immune == False: # base of 80% are infected
+    if outcome > 0.20 and primaryAgent.immune == False: # base of 80% infection rate
         primaryAgent.infected = True
         primaryAgent.progression = 1
         primaryAgent.model.infected += 1

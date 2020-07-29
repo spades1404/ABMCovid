@@ -57,9 +57,10 @@ class covidModel(Model):
 
             coordSet = allSpecialCoords[i] # a dual coordinate pair which acts as the agents home and work
             a = covAgent(i,self,coordSet[0],coordSet[1],coordSet[2],infectedAgent) #creates an agent
-            #im going to say all the agents begin at their home coord
+            b = covAgent(i,self,None,None,coordSet[2],None) #Creating visual for the hub
             # Setting all agents to begin at their work coord so that they can be infected stationary
             self.grid.place_agent(a,coordSet[1]) #adds the agent do the grid
+            self.grid.place_agent(b,coordSet[2]) #Adds agent as visual to identify hub easier
             self.schedule.add(a) #adds the agent to the scheduler
 
 
