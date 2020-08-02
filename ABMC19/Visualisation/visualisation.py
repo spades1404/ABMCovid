@@ -1,19 +1,28 @@
-from mesa.visualization.modules import CanvasGrid
+#from mesa.visualization.modules import CanvasGrid #Old
+from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule
 from ABMC19.Model.model import *
 
+from ABMC19.Model.SpecialCoords.gym import Gym
+from ABMC19.Model.SpecialCoords.hospital import Hospital
+from ABMC19.Model.SpecialCoords.home import Home
+from ABMC19.Model.SpecialCoords.shops import Shop
+from ABMC19.Model.SpecialCoords.workplaces import Workplace
+
 def agentPortrayal(agent):
     portrayal = {
         "Shape": "circle",
-        "Filled" : "true",
+        "Filled" : "false",
         "r" : 0.5,
-        "Layer" : 1
+        "Layer" : 1,
+        "Color" : "red"
     }
+
 
     #maybe a switch statment here?
     if agent.infected == False:
-        portrayal["Color"] = "green"
+        portrayal["Color"] = "gold"
     elif agent.infected == True and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "red"
     #elif agent.infected == True and agent.dead == False and agent.progression == 2:
@@ -22,6 +31,27 @@ def agentPortrayal(agent):
         return
     elif agent.immune == True:
         portrayal["Color"] = "purple"
+
+    return portrayal
+
+def cellPortrayal(building):
+    portrayal = {
+        "Shape": "circle", #square doesnt seem to work
+        "Filled": "true",
+        "r": 1,
+        "Layer": 1,
+        "Color" : "green"
+    }
+    if type(building) == Gym:
+        portrayal["Color"] = "purple"
+    elif type(building) == Home:
+        portrayal["Color"] = "orange"
+    elif type(building) == Hospital:
+        portrayal["Color"] = "cyan"
+    elif type(building) == Shop:
+        portrayal["Color"] = "yellow"
+    elif type(building) == Workplace:
+        portrayal["Color"] = "green"
 
     return portrayal
 
@@ -39,15 +69,12 @@ def chart(tracker,colour):
     )
 
 def startVisuals(width,height,numAgents,numStartInfected):
-    grid =  CanvasGrid(agentPortrayal,width,height,500,500)
+    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,500,500)
 
     server = ModularServer(
         covidModel,
         [
-            grid,
-            chart("Deaths","Black"),
-            chart("Infected","Red"),
-            chart("Immune","Purple")
+            grid
         ],
         "Covid Model",
         {
@@ -61,4 +88,4 @@ def startVisuals(width,height,numAgents,numStartInfected):
     server.port = 8521
     server.launch()
 
-#startVisuals(20,20,10,10)
+#startVisuals(50,50,20,1)

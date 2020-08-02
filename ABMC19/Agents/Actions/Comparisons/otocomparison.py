@@ -2,7 +2,7 @@ import random
 
 ### ONE TO ONE COMPARISONS ###
 
-
+'''
 def onetoonecomparison(primaryAgent,secondaryAgent):
     if secondaryAgent.infected == False or secondaryAgent.pos == secondaryAgent.homeCoord or primaryAgent.infected == True: #if they are not infected or in their home
         return
@@ -19,4 +19,40 @@ def onetoonecomparison(primaryAgent,secondaryAgent):
         primaryAgent.infected = True
         primaryAgent.progression = 1
         primaryAgent.model.infected += 1
+'''
+
+def otoc(
+        primaryAgent,
+        secondaryAgent,
+        sameLocation = False,
+        hospital = False, # Assuming hospitals have higher rates of infection
+        workplace = False,
+        dirtyCell = False
+):
+    if secondaryAgent.carrier == False or primaryAgent.infected == True or primaryAgent.immune == True:
+        return
+    else:
+        outcome = random.random()
+
+        if primaryAgent.distanced == True:
+            outcome -= 0.1 #reduces the chance of infection by 10%
+
+        elif sameLocation == True:
+            outcome += 0.1
+
+        elif hospital == True:
+            outcome += 0.1
+
+        elif workplace == True:
+            outcome += 0.1
+
+        elif dirtyCell == True:
+            outcome += 0.1
+
+        if outcome > 0.7:
+            primaryAgent.infected = True
+            primaryAgent.carrier = True
+            primaryAgent.progression = 1
+            secondaryAgent.reproductionRate += 1
+
 
