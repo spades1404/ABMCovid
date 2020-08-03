@@ -1,4 +1,6 @@
 #from mesa.visualization.modules import CanvasGrid #Old
+from mesa.visualization.UserParam import UserSettableParameter
+
 from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule
@@ -72,18 +74,44 @@ def chart(tracker,colour):
 def startVisuals(width,height,numAgents,numStartInfected):
     grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,500,500)
 
+    model_params = {
+        "numAgents": UserSettableParameter(
+            "slider",
+            "Number of agents",
+            40,  # Default value
+            10,  # Lowest value
+            100,  # Highest value
+            1,  # Increment by
+            description="Choose how many agents to include in the model",
+        ),
+
+        "gridWidth": 40,
+        "gridHeight": 40,
+
+        "startingInfected": UserSettableParameter(
+            "slider",
+            "Number of agents infected at start",
+            2,  # Default value
+            0,  # Lowest value
+            50,  # Highest value
+            1,  # Increment by
+            description="Choose infected agents at start",
+        ),
+    }
+
     server = ModularServer(
         covidModel,
         [
             grid
         ],
         "Covid Model",
-        {
-            "numAgents" : numAgents,
-            "gridWidth" : width,
-            "gridHeight" : height,
-            "startingInfected" : numStartInfected
-        }
+        # {
+        #     "numAgents" : numAgents,
+        #     "gridWidth" : width,
+        #     "gridHeight" : height,
+        #     "startingInfected" : numStartInfected
+        # }
+        model_params
     )
 
     server.port = 8521
