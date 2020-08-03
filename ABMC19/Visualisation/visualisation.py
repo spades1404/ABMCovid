@@ -36,9 +36,10 @@ def agentPortrayal(agent):
 
 def cellPortrayal(building):
     portrayal = {
-        "Shape": "circle", #square doesnt seem to work
+        "Shape": "rect", #square doesnt seem to work
         "Filled": "true",
-        "r": 1,
+        "w": 0.9,
+        "h": 0.9,
         "Layer": 1,
         "Color" : "green"
     }
