@@ -10,7 +10,7 @@ def obesityDef():
 
 def ageDef():
     data = dataSet.split("\t")
-    print(numpy.random.choice(numpy.arange(0,91), p = data))
+    return (numpy.random.choice(numpy.arange(0,91), p = data))
 
 def RTF(chance): #Chance is Percent of people that returns True, e.g 60% is 0.6 (RTF = RANDOM TRUE FALSE)
     if random.random() < chance:

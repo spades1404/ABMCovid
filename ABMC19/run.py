@@ -31,8 +31,8 @@ if sys.version_info[1] == 8:
 #    model.step()
 
 #just visuals
-startVisuals(width=40,
-             height=40,
+startVisuals(width=100,
+             height = 100,
              numAgents=40,
              numStartInfected=2,
              ) # gridx,gridy,num agents, num infected

@@ -4,6 +4,7 @@ from ABMC19.Agents.Characteristics.characteristics import *
 from ABMC19.Agents.Actions.Pathfinding.grabDestCoord import grabDestCoord
 from ABMC19.Agents.Actions.trails import cellInfector
 from ABMC19.Agents.Actions.Comparisons.covidComparison import covidComparison
+from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
 
 class covAgent(Agent):
     def __init__(self,
@@ -110,7 +111,7 @@ class covAgent(Agent):
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same
         covidComparison(self)
         #then we will self check the progression of our disease
-        #selfCheck(self) #REMINDER LATER I PLAN TO USE THIS TO DECIDE IF WE WILL MOVE
+        selfCheck(self) #REMINDER LATER I PLAN TO USE THIS TO DECIDE IF WE WILL MOVE
         #then we will do our pathfinding
         moveAgent(self)
 

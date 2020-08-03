@@ -1,4 +1,3 @@
-#from mesa.visualization.modules import CanvasGrid #Old
 from mesa.visualization.UserParam import UserSettableParameter
 
 from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
@@ -71,38 +70,48 @@ def chart(tracker,colour):
         )
     )
 
-def startVisuals(width,height,numAgents,numStartInfected):
-    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,500,500)
+
+def USP(type,title,defV,lowV,hiV,incr,desc):
+    return UserSettableParameter(
+        type,
+        title,
+        defV,
+        lowV,
+        hiV,
+        incr,
+        desc
+    )
+
+
+
+def startVisuals(width,
+                 height,
+                 numAgents = 40,
+                 numStartInfected = 2):
+
+    #wh  = USP("slider","Grid Size",width,10,1000,1,"Choose the grid size x by x")
+    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,600,600)
+
+
 
     model_params = {
-        "numAgents": UserSettableParameter(
-            "slider",
-            "Number of agents",
-            40,  # Default value
-            10,  # Lowest value
-            100,  # Highest value
-            1,  # Increment by
-            description="Choose how many agents to include in the model",
-        ),
+        "numAgents": USP("slider","Number of Agents",numAgents,10,1000,1,"Choose how many agents to include in the model"),
+        "startingInfected": USP("slider", "Number of agents infected at start", numStartInfected, 0, 50, 1,"Choose infected agents at start"),
+        "gridWidth": width,
+        "gridHeight": height,
 
-        "gridWidth": 40,
-        "gridHeight": 40,
 
-        "startingInfected": UserSettableParameter(
-            "slider",
-            "Number of agents infected at start",
-            2,  # Default value
-            0,  # Lowest value
-            50,  # Highest value
-            1,  # Increment by
-            description="Choose infected agents at start",
-        ),
+
     }
 
     server = ModularServer(
         covidModel,
         [
-            grid
+            grid,
+            chart("CurrentInfected","Red"),
+            chart("Deaths","Black"),
+            chart("Immune","Purple"),
+            chart("Reproduction Rate","Orange")
         ],
         "Covid Model",
         # {

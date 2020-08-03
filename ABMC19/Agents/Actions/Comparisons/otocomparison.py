@@ -54,5 +54,6 @@ def otoc(
             primaryAgent.carrier = True
             primaryAgent.progression = 1
             secondaryAgent.reproductionRate += 1
+            primaryAgent.model.currentInfected += 1
 
 
