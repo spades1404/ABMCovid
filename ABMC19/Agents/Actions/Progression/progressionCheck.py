@@ -16,10 +16,12 @@ def selfCheck(agent):
             agent.model.currentInfected -= 1
             x = bool(random.getrandbits(1)) #going to say its 50/50 that the
 
-            cfr = random.uniform(0,1) #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
+            cfr = random.random() #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
 
-            # if agent.obese == True:
-            #     cfr += 0.2 #lets say it adds a 20% risk of death
+
+            if agent.bmi > 30:
+                cfr += 0.2 #lets say it adds a 20% risk of death
+
 
             if cfr > 0.95: #5% chance of death
                 agent.model.deaths += 1

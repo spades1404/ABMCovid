@@ -21,8 +21,6 @@ def nearestOneCoords(possibleMoves,destination):
     tree = spatial.KDTree(possibleMoves)
     listPositions = tree.query([destination], k=1)[1]  # returns the list positions of the 3 nearest coords
 
-    print(possibleMoves)
-    print(listPositions)
     return possibleMoves[(listPositions[0])]
 
 

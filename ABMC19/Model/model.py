@@ -75,14 +75,18 @@ class covidModel(Model):
                 "Deaths" : "deaths", #tracks total deaths
                 "Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
-                # "Reproduction Rate" : Rrate(self)
+                "Reproduction Rate" : Rrate
+
             }
         )
 
 
     def step(self):
-        # if self.currentInfected == 0:  # this means there is no more chance the disease will spread
-        #    self.running = False #then we will stop the visual model
+
+        #for i in self.agents: i.reproductionRate = 0
+
+        if self.currentInfected == 0:  # this means there is no more chance the disease will spread
+            self.running = False #then we will stop the visual model
 
         # print("Rate", Rrate(self))
         self.schedule.step() # do a step
@@ -90,6 +94,8 @@ class covidModel(Model):
         self.datacollector.collect(self) # collect our data
 
         updateDirtyCells(self)
+
+
 
     def returnCellBuildings(self,x,y):
         if (x,y) not in self.fullCoords:

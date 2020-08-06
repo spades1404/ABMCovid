@@ -1,4 +1,3 @@
-#from mesa.visualization.modules import CanvasGrid #Old
 from mesa.visualization.UserParam import UserSettableParameter
 
 from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
@@ -74,10 +73,35 @@ chart = ChartModule(
     data_collector_name = "datacollector"
 )
 
-def startVisuals(width,height,numAgents,numStartInfected):
-    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,500,500)
+
+def USP(type,title,defV,lowV,hiV,incr,desc):
+    return UserSettableParameter(
+        type,
+        title,
+        defV,
+        lowV,
+        hiV,
+        incr,
+        desc
+    )
+
+
+
+def startVisuals(width,
+                 height,
+                 numAgents = 40,
+                 numStartInfected = 2):
+
+    #wh  = USP("slider","Grid Size",width,10,1000,1,"Choose the grid size x by x")
+    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,600,600)
+
+
 
     model_params = {
+      
+        "gridWidth": width,
+        "gridHeight": height,
+
         "numAgents": UserSettableParameter(
             "slider",
             "Number of agents",
@@ -87,10 +111,7 @@ def startVisuals(width,height,numAgents,numStartInfected):
             1,  # Increment by
             description="Choose how many agents to include in the model",
         ),
-
-        "gridWidth": 40,
-        "gridHeight": 40,
-
+      
         "startingInfected": UserSettableParameter(
             "slider",
             "Number of agents infected at start",
@@ -146,8 +167,10 @@ def startVisuals(width,height,numAgents,numStartInfected):
         covidModel,
         [
             grid,
-            MyTextElement(),
-            chart
+            chart("CurrentInfected","Red"),
+            chart("Deaths","Black"),
+            chart("Immune","Purple"),
+            chart("Reproduction Rate","Orange")
         ],
         "Covid Model",
         # {

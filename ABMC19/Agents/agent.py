@@ -5,6 +5,7 @@ from ABMC19.Agents.Characteristics.characteristics import *
 from ABMC19.Agents.Actions.Pathfinding.grabDestCoord import grabDestCoord
 from ABMC19.Agents.Actions.trails import cellInfector
 from ABMC19.Agents.Actions.Comparisons.covidComparison import covidComparison
+from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
 
 class covAgent(Agent):
     def __init__(self,
