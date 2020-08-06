@@ -167,10 +167,11 @@ def startVisuals(width,
         covidModel,
         [
             grid,
-            chart("CurrentInfected","Red"),
-            chart("Deaths","Black"),
-            chart("Immune","Purple"),
-            chart("Reproduction Rate","Orange")
+            chart
+#             chart("CurrentInfected","Red"),
+#             chart("Deaths","Black"),
+#             chart("Immune","Purple"),
+#             chart("Reproduction Rate","Orange")
         ],
         "Covid Model",
         # {
