@@ -52,6 +52,7 @@ def otoc(
         if outcome > 0.7:
             primaryAgent.infected = True
             primaryAgent.carrier = True
+            primaryAgent.model.currentInfected += 1
             primaryAgent.progression = 1
             secondaryAgent.reproductionRate += 1
             primaryAgent.model.currentInfected += 1

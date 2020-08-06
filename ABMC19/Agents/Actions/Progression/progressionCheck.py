@@ -18,8 +18,10 @@ def selfCheck(agent):
 
             cfr = random.random() #cfr is case fatality rate, im going of an avg of 5% cases result in death (however this can be alterable)
 
+
             if agent.bmi > 30:
                 cfr += 0.2 #lets say it adds a 20% risk of death
+
 
             if cfr > 0.95: #5% chance of death
                 agent.model.deaths += 1

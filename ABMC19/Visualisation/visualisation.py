@@ -2,7 +2,7 @@ from mesa.visualization.UserParam import UserSettableParameter
 
 from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import ChartModule
+from mesa.visualization.modules import ChartModule, TextElement
 from ABMC19.Model.model import *
 
 from ABMC19.Model.SpecialCoords.gym import Gym
@@ -10,6 +10,13 @@ from ABMC19.Model.SpecialCoords.hospital import Hospital
 from ABMC19.Model.SpecialCoords.home import Home
 from ABMC19.Model.SpecialCoords.shops import Shop
 from ABMC19.Model.SpecialCoords.workplaces import Workplace
+
+
+class MyTextElement(TextElement):
+    def render(self, model):
+        rval = Rrate(model)
+        text_r = "{:.2f}".format(rval)
+        return f"R: {text_r}"
 
 def agentPortrayal(agent):
     portrayal = {
@@ -57,18 +64,14 @@ def cellPortrayal(building):
 
     return portrayal
 
-def chart(tracker,colour):
-    return (
-        ChartModule(
-            [
-                {
-                    "Label" : tracker,
-                    "Color" : colour
-                }
-            ],
-            data_collector_name = "datacollector"
-        )
-    )
+chart = ChartModule(
+    [
+        {"Label": "Deaths", "Color": "Black"},
+        {"Label": "Infected", "Color": "Red"},
+        {"Label": "Immune", "Color": "Purple"},
+    ],
+    data_collector_name = "datacollector"
+)
 
 
 def USP(type,title,defV,lowV,hiV,incr,desc):
@@ -95,13 +98,69 @@ def startVisuals(width,
 
 
     model_params = {
-        "numAgents": USP("slider","Number of Agents",numAgents,10,1000,1,"Choose how many agents to include in the model"),
-        "startingInfected": USP("slider", "Number of agents infected at start", numStartInfected, 0, 50, 1,"Choose infected agents at start"),
+      
         "gridWidth": width,
         "gridHeight": height,
 
+        "numAgents": UserSettableParameter(
+            "slider",
+            "Number of agents",
+            40,  # Default value
+            10,  # Lowest value
+            100,  # Highest value
+            1,  # Increment by
+            description="Choose how many agents to include in the model",
+        ),
+      
+        "startingInfected": UserSettableParameter(
+            "slider",
+            "Number of agents infected at start",
+            2,  # Default value
+            0,  # Lowest value
+            50,  # Highest value
+            1,  # Increment by
+            description="Choose infected agents at start",
+        ),
 
+        "chanceMask": UserSettableParameter(
+            "slider",
+            "Mask percentage",
+            0.5,  # Default value
+            0,  # Lowest value
+            1,  # Highest value
+            0.1,  # Increment by
+            description="Choose masked agents at start",
+        ),
 
+        "chanceDistanced": UserSettableParameter(
+            "slider",
+            "Distanced percentage",
+            0.5,  # Default value
+            0,  # Lowest value
+            1,  # Highest value
+            0.1,  # Increment by
+            description="Choose distanced agents at start",
+        ),
+
+        "chanceEssentialMovement": UserSettableParameter(
+            "slider",
+            "Essential movement percentage",
+            0.5,  # Default value
+            0,  # Lowest value
+            1,  # Highest value
+            0.1,  # Increment by
+            description="Choose essential moving agents at start",
+        ),
+
+        "chanceHygenic": UserSettableParameter(
+            "slider",
+            "Hygenic percentage",
+            0.5,  # Default value
+            0,  # Lowest value
+            1,  # Highest value
+            0.1,  # Increment by
+            description="Choose hygenic agents at start",
+        ),
     }
 
     server = ModularServer(

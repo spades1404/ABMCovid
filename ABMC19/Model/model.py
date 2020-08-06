@@ -73,9 +73,10 @@ class covidModel(Model):
         self.datacollector = DataCollector(
             model_reporters={
                 "Deaths" : "deaths", #tracks total deaths
-                "CurrentInfected" : "currentInfected", #tracks current tick infections
+                "Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
                 "Reproduction Rate" : Rrate
+
             }
         )
 
@@ -87,6 +88,7 @@ class covidModel(Model):
         if self.currentInfected == 0:  # this means there is no more chance the disease will spread
             self.running = False #then we will stop the visual model
 
+        # print("Rate", Rrate(self))
         self.schedule.step() # do a step
 
         self.datacollector.collect(self) # collect our data
