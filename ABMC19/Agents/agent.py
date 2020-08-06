@@ -1,5 +1,6 @@
 from mesa import Agent
 from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
+from ABMC19.Agents.Actions.Progression.progressionCheck import selfCheck
 from ABMC19.Agents.Characteristics.characteristics import *
 from ABMC19.Agents.Actions.Pathfinding.grabDestCoord import grabDestCoord
 from ABMC19.Agents.Actions.trails import cellInfector
@@ -15,17 +16,6 @@ class covAgent(Agent):
 
 
         super().__init__(unique_id,model)
-
-        #person covid status
-        self.dead = False
-        self.infected = False
-        self.immune = False
-        self.ticksSinceInfection = 0 #i will say each tick is a day, this is only activated once the agent is infected
-
-        #disease progression
-        self.progression = 0
-        #0=>not infected 1=>incubation 2=>symptomatic 3=>outcome
-
 
         #Coordinates of the agents workplace and homeplace
         self.home = home #this is a home object
@@ -105,12 +95,13 @@ class covAgent(Agent):
 
 
     def step(self):
+        # print("RR1", self.reproductionRate)
         cellInfector(self) #Checking if we have left any reminants of the disease behind
 
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same
         covidComparison(self)
         #then we will self check the progression of our disease
-        #selfCheck(self) #REMINDER LATER I PLAN TO USE THIS TO DECIDE IF WE WILL MOVE
+        selfCheck(self) #REMINDER LATER I PLAN TO USE THIS TO DECIDE IF WE WILL MOVE
         #then we will do our pathfinding
         moveAgent(self)
 
