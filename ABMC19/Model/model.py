@@ -14,8 +14,7 @@ from ABMC19.Model.CoordinateScripts.updateDirtyCells import updateDirtyCells
 class covidModel(Model):
 
     def __init__(self,
-                 gridWidth,
-                 gridHeight,
+                 widthAndHeight,
                  numAgents,
                  startingInfected=2,
                  chanceDistanced = 0.5,
@@ -25,12 +24,12 @@ class covidModel(Model):
                  ):
 
         super(covidModel, self).__init__()
-        self.gridWidth = gridWidth #model grid width
-        self.gridHeight = gridHeight #model grid height
+        self.gridWidth = widthAndHeight #model grid width
+        self.gridHeight = widthAndHeight #model grid height
 
         self.numAgents = numAgents #models number of agents
         self.schedule = RandomActivation(self) #Creating Scheduler
-        self.grid = MultiGrid(gridWidth,gridHeight,torus=True) #Creating the Grid
+        self.grid = MultiGrid(widthAndHeight,widthAndHeight,torus=True) #Creating the Grid
 
         ##############Agent P Values#################
 
@@ -73,7 +72,7 @@ class covidModel(Model):
         self.datacollector = DataCollector(
             model_reporters={
                 "Deaths" : "deaths", #tracks total deaths
-                "Infected" : "currentInfected", #tracks current tick infections
+                "Current Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
                 "Reproduction Rate" : Rrate
 

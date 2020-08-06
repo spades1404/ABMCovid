@@ -13,10 +13,12 @@ from ABMC19.Model.SpecialCoords.workplaces import Workplace
 
 
 class MyTextElement(TextElement):
-    def render(self, model):
+    def __init__(self, model):
+        self.model = model
+    def render(self,model):
         rval = Rrate(model)
         text_r = "{:.2f}".format(rval)
-        return f"R: {text_r}"
+        return f"R Value: {text_r}"
 
 def agentPortrayal(agent):
     portrayal = {
@@ -64,50 +66,29 @@ def cellPortrayal(building):
 
     return portrayal
 
-chart = ChartModule(
-    [
-        {"Label": "Deaths", "Color": "Black"},
-        {"Label": "Infected", "Color": "Red"},
-        {"Label": "Immune", "Color": "Purple"},
-    ],
-    data_collector_name = "datacollector"
-)
 
-
-def USP(type,title,defV,lowV,hiV,incr,desc):
-    return UserSettableParameter(
-        type,
-        title,
-        defV,
-        lowV,
-        hiV,
-        incr,
-        desc
+def chart(dataDicts): #takes a list of dictionaries so it can display more than one line
+    return ChartModule(
+        [i for i in dataDicts],
+        data_collector_name= "datacollector"
     )
 
-
-
-def startVisuals(width,
-                 height,
+def startVisuals(widthHeight = 100,
                  numAgents = 40,
                  numStartInfected = 2):
 
-    #wh  = USP("slider","Grid Size",width,10,1000,1,"Choose the grid size x by x")
-    grid =  CanvasGrid(agentPortrayal,cellPortrayal,width,height,600,600)
+    grid =  CanvasGrid(agentPortrayal,cellPortrayal,widthHeight,widthHeight,600,600)
 
 
 
     model_params = {
-      
-        "gridWidth": width,
-        "gridHeight": height,
-
+        "widthAndHeight" : widthHeight,
         "numAgents": UserSettableParameter(
             "slider",
             "Number of agents",
-            40,  # Default value
+            widthHeight,  # Default value
             10,  # Lowest value
-            100,  # Highest value
+            1000,  # Highest value
             1,  # Increment by
             description="Choose how many agents to include in the model",
         ),
@@ -167,18 +148,11 @@ def startVisuals(width,
         covidModel,
         [
             grid,
-            chart("CurrentInfected","Red"),
-            chart("Deaths","Black"),
-            chart("Immune","Purple"),
-            chart("Reproduction Rate","Orange")
+            MyTextElement(covidModel),
+            chart([{"Label": "Current Infected", "Color": "Red"}]),
+            chart([{"Label": "Deaths", "Color": "Black"},{"Label": "Immune", "Color": "Purple"}]),
         ],
         "Covid Model",
-        # {
-        #     "numAgents" : numAgents,
-        #     "gridWidth" : width,
-        #     "gridHeight" : height,
-        #     "startingInfected" : numStartInfected
-        # }
         model_params
     )
 

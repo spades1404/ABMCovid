@@ -55,6 +55,6 @@ def otoc(
             primaryAgent.model.currentInfected += 1
             primaryAgent.progression = 1
             secondaryAgent.reproductionRate += 1
-            primaryAgent.model.currentInfected += 1
+            primaryAgent.numberOfTimesInfected += 1
 
 
