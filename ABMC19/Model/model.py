@@ -6,6 +6,7 @@ from mesa.datacollection import DataCollector
 from ABMC19.Agents.agent import *
 from ABMC19.Model.CoordinateScripts.generateSpecialAreas import *
 from ABMC19.Model.Initiallization.initAgents import generateAgents
+from ABMC19.Model.Initiallization.setInfected import setInfecteed
 from ABMC19.Model.CoordinateScripts.generateHubs import generateHubs
 from ABMC19.Model.DataCollectors.Rrate import Rrate
 from ABMC19.Model.CoordinateScripts.updateDirtyCells import updateDirtyCells
@@ -61,6 +62,10 @@ class covidModel(Model):
 
         generateAgents(self) ##Generates all the agents for us aswell as their housing
 
+        setInfecteed(self)
+
+
+
 
         self.dirtyCells = [] #This will track cells that have been left infected by people who are carriers or are infected if they are
 
@@ -78,7 +83,6 @@ class covidModel(Model):
 
             }
         )
-
 
     def step(self):
 

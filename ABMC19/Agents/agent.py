@@ -13,7 +13,7 @@ class covAgent(Agent):
                  model,
                  home,
                  work,
-                 infectedOnSpawn):
+                 infectedOnSpawn = False):
 
 
         super().__init__(unique_id,model)
@@ -106,7 +106,7 @@ class covAgent(Agent):
 
 
     def step(self):
-        # print("RR1", self.reproductionRate)
+
         cellInfector(self) #Checking if we have left any reminants of the disease behind
 
         #first we will do our covid spread check, probably for each person we are around. THIS will be only our outcome, since other agents will also do the same
@@ -115,6 +115,8 @@ class covAgent(Agent):
         selfCheckNew(self) #REMINDER LATER I PLAN TO USE THIS TO DECIDE IF WE WILL MOVE
         #then we will do our pathfinding
         moveAgent(self)
+
+
 
 
         #snippet for later
