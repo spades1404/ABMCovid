@@ -19,15 +19,14 @@ def generateAgents(model): #This function will generate homes and houses
 
     for i in range(numAgents):
 
-        '''
         if i < model.currentInfected:  # if i is less then the number of infected agents...
             infectedAgent = True  # then make the next agent infected at start
         else:
             infectedAgent = False
-        '''
+
         house = next(houses)
         workplace = next(workplaces)
-        agent = covAgent(i,model,house,workplace)
+        agent = covAgent(i,model,house,workplace,infectedAgent)
 
         house.inhabitants.append(agent)
 

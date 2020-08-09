@@ -13,7 +13,7 @@ class covAgent(Agent):
                  model,
                  home,
                  work,
-                 infectedOnSpawn = False):
+                 infectedOnSpawn):
 
 
         super().__init__(unique_id,model)
