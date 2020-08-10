@@ -31,15 +31,15 @@ def agentPortrayal(agent):
 
 
     #maybe a switch statment here?
-    if not agent.infected and not agent.dead and not agent.immune:
+    if agent.infected == False and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "gold"
-    elif agent.infected and not agent.dead and not agent.immune:
+    elif agent.infected == False and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "red"
     #elif agent.infected == True and agent.dead == False and agent.progression == 2:
     #    portrayal["Color"] = "red"
-    elif agent.dead:
+    elif agent.dead == True:
         return
-    elif agent.immune:
+    elif agent.immune == True:
         portrayal["Color"] = "purple"
 
     return portrayal
@@ -54,12 +54,18 @@ def cellPortrayal(building):
         "Color" : "green"
     }
     if type(building) == Gym:
+        portrayal["w"] = "2.8"
+        portrayal["h"] = "2.8"
         portrayal["Color"] = "purple"
     elif type(building) == Home:
         portrayal["Color"] = "orange"
     elif type(building) == Hospital:
         portrayal["Color"] = "cyan"
+        portrayal["w"] = "2.8"
+        portrayal["h"] = "2.8"
     elif type(building) == Shop:
+        portrayal["w"] = "2.8"
+        portrayal["h"] = "2.8"
         portrayal["Color"] = "yellow"
     elif type(building) == Workplace:
         portrayal["Color"] = "green"
@@ -73,7 +79,7 @@ def chart(dataDicts): #takes a list of dictionaries so it can display more than 
         data_collector_name= "datacollector"
     )
 
-def startVisuals(widthHeight = 50,
+def startVisuals(widthHeight = 100,
                  numAgents = 40,
                  numStartInfected = 2):
 
