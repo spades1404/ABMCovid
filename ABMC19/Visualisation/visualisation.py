@@ -5,11 +5,11 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule, TextElement
 from ABMC19.Model.model import *
 
-from ABMC19.Model.SpecialCoords.gym import Gym
+from ABMC19.Model.SpecialCoords.misc import Misc
 from ABMC19.Model.SpecialCoords.hospital import Hospital
 from ABMC19.Model.SpecialCoords.home import Home
 from ABMC19.Model.SpecialCoords.shops import Shop
-from ABMC19.Model.SpecialCoords.workplaces import Workplace
+from ABMC19.Model.SpecialCoords.businesses import Business
 
 
 class MyTextElement(TextElement):
@@ -31,12 +31,10 @@ def agentPortrayal(agent):
 
 
     #maybe a switch statment here?
-    if agent.infected == False:
+    if agent.infected == False and agent.dead == False:
         portrayal["Color"] = "gold"
     elif agent.infected == True and agent.dead == False and agent.immune == False:
         portrayal["Color"] = "red"
-    #elif agent.infected == True and agent.dead == False and agent.progression == 2:
-    #    portrayal["Color"] = "red"
     elif agent.dead == True:
         return
     elif agent.immune == True:
@@ -53,7 +51,7 @@ def cellPortrayal(building):
         "Layer": 1,
         "Color" : "green"
     }
-    if type(building) == Gym:
+    if type(building) == Misc:
         portrayal["Color"] = "purple"
     elif type(building) == Home:
         portrayal["Color"] = "orange"
@@ -61,7 +59,7 @@ def cellPortrayal(building):
         portrayal["Color"] = "cyan"
     elif type(building) == Shop:
         portrayal["Color"] = "yellow"
-    elif type(building) == Workplace:
+    elif type(building) == Business:
         portrayal["Color"] = "green"
 
     return portrayal

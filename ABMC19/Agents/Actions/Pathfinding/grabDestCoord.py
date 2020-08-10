@@ -1,4 +1,4 @@
-from ABMC19.Agents.Actions.Pathfinding.findPossiblePaths import nearestXCoords
+from ABMC19.Agents.Actions.Pathfinding.findPossiblePaths import nearestOneCoords
 
 def grabDestCoord(agent):
     #using a switch statement here
@@ -19,8 +19,8 @@ def grabDestCoord(agent):
     elif x == 1:
         agent.currentDestCoord = agent.home.location
     elif x == 2:
-        agent.currentDestCoord = nearestXCoords([i.location for i in agent.model.allSpecialAreas["shops"]], agent.pos, 1)
+        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["shops"]], agent.pos)
     elif x == 3:
-        agent.currentDestCoord = nearestXCoords([i.location for i in agent.model.allSpecialAreas["gyms"]], agent.pos, 1)
+        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["misc"]], agent.pos)
     elif x == 4:
-        agent.currentDestCoord = nearestXCoords([i.location for i in agent.model.allSpecialAreas["hospitals"]], agent.pos, 1)
+        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["hospitals"]], agent.pos)

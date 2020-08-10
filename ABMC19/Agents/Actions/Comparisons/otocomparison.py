@@ -29,13 +29,19 @@ def otoc(
         workplace = False,
         dirtyCell = False
 ):
-    if secondaryAgent.carrier == False or primaryAgent.infected == True or primaryAgent.immune == True:
+    if secondaryAgent.carrier == False or primaryAgent.infected == True:
         return
     else:
         outcome = random.random()
 
         if primaryAgent.distanced == True:
             outcome -= 0.1 #reduces the chance of infection by 10%
+
+        elif primaryAgent.hygenic == True:
+            outcome -= 0.1
+
+        elif primaryAgent.mask == True:
+            outcome -= 0.1
 
         elif sameLocation == True:
             outcome += 0.1

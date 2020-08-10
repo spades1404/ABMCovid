@@ -1,10 +1,20 @@
+'''
 from mesa import Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
+Old
+'''
+
+from ABMC19.ModifiedMesa.mesa import Model
+from ABMC19.ModifiedMesa.mesa.time import RandomActivation
+from ABMC19.ModifiedMesa.mesa.space import MultiGrid
+from ABMC19.ModifiedMesa.mesa.datacollection import DataCollector
 
 from ABMC19.Agents.agent import *
 from ABMC19.Model.CoordinateScripts.generateSpecialAreas import *
+
+
 from ABMC19.Model.Initiallization.initAgents import generateAgents
 from ABMC19.Model.Initiallization.setInfected import setInfecteed
 from ABMC19.Model.CoordinateScripts.generateHubs import generateHubs
@@ -21,7 +31,9 @@ class covidModel(Model):
                  chanceDistanced = 0.5,
                  chanceHygenic = 0.5,
                  chanceEssentialMovement = 0.5,
-                 chanceMask = 0.5
+                 chanceMask = 0.5,
+                 contactTracing = False, #contact tracing is experimental
+                 lockdown = False
                  ):
 
         super(covidModel, self).__init__()
@@ -31,6 +43,9 @@ class covidModel(Model):
         self.numAgents = numAgents #models number of agents
         self.schedule = RandomActivation(self) #Creating Scheduler
         self.grid = MultiGrid(widthAndHeight,widthAndHeight,torus=True) #Creating the Grid
+
+        self.contactTracing = contactTracing
+        self.lockdown = lockdown
 
         ##############Agent P Values#################
 
@@ -101,6 +116,7 @@ class covidModel(Model):
 
 
     def returnCellBuildings(self,x,y):
+
         if (x,y) not in self.fullCoords:
             return False
         else:
@@ -110,6 +126,14 @@ class covidModel(Model):
             for i in self.allSpecialAreas["houses"]:
                 if i.location == (x,y):
                     return i
+            for i in self.allSpecialAreas["hospitals"]:
+                if i.location == (x, y):
+                    return i
+
+    def removeAgent(self,agent):
+        self.schedule.remove(agent)
+
+
 
 
 

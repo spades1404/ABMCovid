@@ -17,10 +17,10 @@ def covidCompare(agent):
         onetoonecomparison(agent,i)
 '''
 
-def covidComparison(agent):
+def covidComparison(agent): #this could use a change around at some point
     #if they are at any building only check one cell
-    if agent.pos in agent.model.fullCoords :
-        for i in grabNeighboursOneCell(agent):
+    if agent.pos in agent.model.fullCoords : #if agent is in any building
+        for i in grabNeighboursOneCell(agent): #for each one agents in the building compare
             otoc(agent,
                  i,
                  sameLocation= True,
@@ -28,7 +28,7 @@ def covidComparison(agent):
                  workplace= [True if agent.pos in [i.location for i in agent.model.workplaces] else False],
                  dirtyCell= [True if agent.pos in [i[0] for i in agent.model.dirtyCells] else False]
                  )
-    else:
+    else: #if check aruond them too
         for i in grabNeighboursAgents(agent,False):
             otoc(
                 agent,
