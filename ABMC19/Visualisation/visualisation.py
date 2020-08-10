@@ -1,6 +1,6 @@
 from mesa.visualization.UserParam import UserSettableParameter
 
-from ABMC19.ModifiedMesa.mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
+from ABMC19.Libs.Mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule, TextElement
 from ABMC19.Model.model import *

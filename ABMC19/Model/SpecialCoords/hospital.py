@@ -1,6 +1,6 @@
 from ABMC19.Model.SpecialCoords.areaofinterest import *
 import random
-from itertools import chain
+
 class Hospital(aoi):
     def __init__(self,model):
         super(Hospital, self).__init__(capacity=200,model=model)

@@ -1,6 +1,6 @@
-#from mesa import Agent Old
+#from Mesa import Agent Old
 
-from ABMC19.ModifiedMesa.mesa import Agent
+from ABMC19.Libs.Mesa import Agent
 
 from ABMC19.Agents.Actions.Pathfinding.pathmaster import moveAgent
 from ABMC19.Agents.Characteristics.characteristics import *

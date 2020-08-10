@@ -1,15 +1,15 @@
 '''
-from mesa import Model
-from mesa.time import RandomActivation
-from mesa.space import MultiGrid
-from mesa.datacollection import DataCollector
+from Mesa import Model
+from Mesa.time import RandomActivation
+from Mesa.space import MultiGrid
+from Mesa.datacollection import DataCollector
 Old
 '''
 
-from ABMC19.ModifiedMesa.mesa import Model
-from ABMC19.ModifiedMesa.mesa.time import RandomActivation
-from ABMC19.ModifiedMesa.mesa.space import MultiGrid
-from ABMC19.ModifiedMesa.mesa.datacollection import DataCollector
+from ABMC19.Libs.Mesa import Model
+from ABMC19.Libs.Mesa.time import RandomActivation
+from ABMC19.Libs.Mesa.space import MultiGrid
+from ABMC19.Libs.Mesa.datacollection import DataCollector
 
 from ABMC19.Agents.agent import *
 from ABMC19.Model.CoordinateScripts.generateSpecialAreas import *
