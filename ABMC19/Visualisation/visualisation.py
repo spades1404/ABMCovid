@@ -31,15 +31,15 @@ def agentPortrayal(agent):
 
 
     #maybe a switch statment here?
-    if agent.infected == False:
+    if not agent.infected and not agent.dead and not agent.immune:
         portrayal["Color"] = "gold"
-    elif agent.infected == True and agent.dead == False and agent.immune == False:
+    elif agent.infected and not agent.dead and not agent.immune:
         portrayal["Color"] = "red"
     #elif agent.infected == True and agent.dead == False and agent.progression == 2:
     #    portrayal["Color"] = "red"
-    elif agent.dead == True:
+    elif agent.dead:
         return
-    elif agent.immune == True:
+    elif agent.immune:
         portrayal["Color"] = "purple"
 
     return portrayal
@@ -73,7 +73,7 @@ def chart(dataDicts): #takes a list of dictionaries so it can display more than 
         data_collector_name= "datacollector"
     )
 
-def startVisuals(widthHeight = 100,
+def startVisuals(widthHeight = 50,
                  numAgents = 40,
                  numStartInfected = 2):
 
