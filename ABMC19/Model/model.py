@@ -99,12 +99,15 @@ class covidModel(Model):
             }
         )
 
+        print("Model Initialization Successful! - Running")
+
     def step(self):
 
         #for i in self.agents: i.reproductionRate = 0
 
         if self.currentInfected == 0:  # this means there is no more chance the disease will spread
             self.running = False #then we will stop the visual model
+            
 
         # print("Rate", Rrate(self))
         self.schedule.step() # do a step

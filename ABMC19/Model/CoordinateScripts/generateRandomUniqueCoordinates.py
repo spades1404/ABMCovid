@@ -103,7 +103,6 @@ def tetromino(model): #thought this sounded catchier than grucLarge xd
     #now going to go through a phase of shifting the cells to check if we are clear of any obstructions
     while True:
         if [True if i not in model.fullCoords else False for i in coordSet] == [True,True,True,True]:
-            print([True if i not in model.fullCoords else False for i in coordSet])
             break
         else:
             coordSet = offsetCoords(coordSet,model)
