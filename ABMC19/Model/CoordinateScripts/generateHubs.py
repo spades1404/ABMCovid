@@ -26,10 +26,9 @@ def generateHubs(model):
     Gyms = 100 ppl max 
     Shops = 150 ppl max
     '''
-
+    hospitals = [Hospital(model) for i in range(numHospitals)]
     shops = [Shop(model) for i in range(numShops)]
     miscs = [Misc(model) for i in range(numMisc)]
-    hospitals = [Hospital(model) for i in range(numHospitals)]
     houses = [Home(model) for i in range(numHouses)]
     businesses = [Business(model) for i in range(numWorkplaces)]
 

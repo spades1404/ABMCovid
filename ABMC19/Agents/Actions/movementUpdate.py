@@ -3,7 +3,7 @@ import numpy
 
 def updateMovementDir(agent):
     if agent.traced == True: #if they have been contact traced, check if they are at the hospital and test them
-        f = [i for i in agent.model.allSpecialAreas["hospitals"] if i.location == agent.pos]
+        f = [i for i in agent.model.allSpecialAreas["hospitals"] if agent.pos in i.location]
         if f != []:
             if agent.tested == False:
                 f[0].test(agent)  # this tests the agent for covid
@@ -11,7 +11,7 @@ def updateMovementDir(agent):
     if agent.progression == 2 and agent.tested == False:
         ########Check if they are at hospital (andf if they need a test)
 
-        f = [i for i in agent.model.allSpecialAreas["hospitals"] if i.location == agent.pos]
+        f = [i for i in agent.model.allSpecialAreas["hospitals"] if agent.pos in i.location]
         if f != []:
             f[0].test(agent) #this tests the agent for covid
             return False
@@ -20,11 +20,11 @@ def updateMovementDir(agent):
             agent.movementDir = 4
             return True
 
-    elif agent.hospitalized == True or (agent.isolating == True and agent.pos == agent.home.location):
+    elif agent.hospitalized == True or (agent.isolating == True and agent.pos == agent.home.location[0]):
         return False
 
     else:
-        if agent.pos == agent.home.location:
+        if agent.pos == agent.home.location[0]:
             agent.movementDir = chooseNewDir(agent) #go somewhere different if they are not home
             if agent.movementDir == 1:
                 return False #tells the agent not to move

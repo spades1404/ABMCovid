@@ -3,7 +3,7 @@ import random
 
 class Hospital(aoi):
     def __init__(self,model):
-        super(Hospital, self).__init__(capacity=200,model=model)
+        super(Hospital, self).__init__(capacity=200,model=model,oneCell=False)
         self.occupants = [] #tracks who is in hospital #not sure if neccessary
 
     def admit(self,agent):
@@ -61,3 +61,4 @@ class Hospital(aoi):
             if random.random() > 0.5: #50 percent chance they ignore it
                 i.movementDir = 4
                 i.traced = True
+

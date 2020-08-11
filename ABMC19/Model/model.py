@@ -120,15 +120,10 @@ class covidModel(Model):
         if (x,y) not in self.fullCoords:
             return False
         else:
-            for i in self.workplaces:
-                if i.location == (x,y):
-                    return i
-            for i in self.allSpecialAreas["houses"]:
-                if i.location == (x,y):
-                    return i
-            for i in self.allSpecialAreas["hospitals"]:
-                if i.location == (x, y):
-                    return i
+            for i in self.allSpecialAreas:
+                for j in self.allSpecialAreas[i]:
+                    if (x,y) in j.location:
+                        return j
 
     def removeAgent(self,agent):
         self.schedule.remove(agent)

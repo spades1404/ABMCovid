@@ -1,4 +1,6 @@
 from ABMC19.Agents.Actions.Pathfinding.findPossiblePaths import nearestOneCoords
+from itertools import chain
+
 
 def grabDestCoord(agent):
     #using a switch statement here
@@ -15,12 +17,12 @@ def grabDestCoord(agent):
     '''
     x = agent.movementDir
     if x == 0:
-        agent.currentDestCoord = agent.work.location
+        agent.currentDestCoord = agent.work.location[0]
     elif x == 1:
-        agent.currentDestCoord = agent.home.location
+        agent.currentDestCoord = agent.home.location[0]
     elif x == 2:
-        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["shops"]], agent.pos)
+        agent.currentDestCoord = nearestOneCoords(list(chain.from_iterable([[j for j in i.location] for i in agent.model.allSpecialAreas["shops"]])), agent.pos)
     elif x == 3:
-        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["misc"]], agent.pos)
+        agent.currentDestCoord = nearestOneCoords(list(chain.from_iterable([[j for j in i.location] for i in agent.model.allSpecialAreas["misc"]])), agent.pos)
     elif x == 4:
-        agent.currentDestCoord = nearestOneCoords([i.location for i in agent.model.allSpecialAreas["hospitals"]], agent.pos)
+        agent.currentDestCoord = nearestOneCoords(list(chain.from_iterable([[j for j in i.location] for i in agent.model.allSpecialAreas["hospitals"]])), agent.pos)

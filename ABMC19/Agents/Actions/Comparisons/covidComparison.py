@@ -24,8 +24,8 @@ def covidComparison(agent): #this could use a change around at some point
             otoc(agent,
                  i,
                  sameLocation= True,
-                 hospital= [True if agent.pos in [i.location for i in agent.model.allSpecialAreas["hospitals"]] else False],
-                 workplace= [True if agent.pos in [i.location for i in agent.model.workplaces] else False],
+                 hospital= [True if agent.pos in [[j for j in i.location] for i in agent.model.allSpecialAreas["hospitals"]] else False],
+                 workplace= [True if agent.pos in [[j for j in i.location] for i in agent.model.workplaces] else False],
                  dirtyCell= [True if agent.pos in [i[0] for i in agent.model.dirtyCells] else False]
                  )
     else: #if check aruond them too
