@@ -1,7 +1,7 @@
 from ABMC19.Libs.Mesa.batchrunner import BatchRunner
 from ABMC19.Model.model import covidModel
 from ABMC19.Model.DataCollectors.Rrate import Rrate
-def bacthRun():
+def batchRun():
     fixedParam = {
         "widthAndHeight" : 50,
         "chanceDistanced" : 0.5,
@@ -32,4 +32,3 @@ def bacthRun():
     runData = batchRun.get_model_vars_dataframe()
     print(runData)
 
-bacthRun()

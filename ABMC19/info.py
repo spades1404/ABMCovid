@@ -16,6 +16,7 @@ print('''
 __author__ = "Rajib Ahmed, Pharadon Larg"
 __credits__ = ["Rajib Ahmed","Pharadon Larg","Bailin Deng","The Nuffield Foundation"]
 __copyright__ = "Copyright 2020, ABMC19 PROJECT"
+__github__ = "spades1404"
 
 __licence__ = "GPL"
 __version__ = "2.0"

@@ -31,7 +31,7 @@ class Hospital(aoi):
             if self.currentCapacity <= 0: #we will try find them another hospital if we cant accomodate
                 for i in agent.model.allSpecialAreas["hospitals"]:
                     if i.currentCapacity > 0:
-                        agent.model.grid.move_agent(agent,i.location)
+                        agent.model.grid.move_agent(agent,random.choice(i.location))
                         i.admit(agent)
                         break
                 #these two lines only occur if the for loop didnt find anything

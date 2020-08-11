@@ -1,11 +1,3 @@
-'''
-from Mesa import Model
-from Mesa.time import RandomActivation
-from Mesa.space import MultiGrid
-from Mesa.datacollection import DataCollector
-Old
-'''
-
 from ABMC19.Libs.Mesa import Model
 from ABMC19.Libs.Mesa.time import RandomActivation
 from ABMC19.Libs.Mesa.space import MultiGrid
@@ -33,7 +25,7 @@ class covidModel(Model):
                  chanceEssentialMovement = 0.5,
                  chanceMask = 0.5,
                  contactTracing = False, #contact tracing is experimental
-                 lockdown = False
+                 lockdown = False ##lockdown in threshholds
                  ):
 
         super(covidModel, self).__init__()
@@ -107,7 +99,7 @@ class covidModel(Model):
 
         if self.currentInfected == 0:  # this means there is no more chance the disease will spread
             self.running = False #then we will stop the visual model
-            
+
 
         # print("Rate", Rrate(self))
         self.schedule.step() # do a step

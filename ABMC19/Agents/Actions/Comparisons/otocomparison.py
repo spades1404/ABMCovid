@@ -34,6 +34,7 @@ def otoc(
     else:
         outcome = random.random()
 
+        #alter p value rather than rng
         if primaryAgent.distanced == True:
             outcome -= 0.1 #reduces the chance of infection by 10%
 
@@ -42,6 +43,8 @@ def otoc(
 
         elif primaryAgent.mask == True:
             outcome -= 0.1
+
+        #add secondary agent params
 
         elif sameLocation == True:
             outcome += 0.1

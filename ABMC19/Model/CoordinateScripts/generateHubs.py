@@ -7,8 +7,9 @@ def generateHubs(model):
 
     numAgents = model.numAgents
 
+    #these need to be updated to reflect accurate spawn figures
     #numHospitals = round((0.0028*numAgents)/100)
-    numHospitals = 1
+    numHospitals = 5
     numMisc = 10
     numShops = round((0.001*numAgents)/150)
     numHouses = 50 #this will be changed
