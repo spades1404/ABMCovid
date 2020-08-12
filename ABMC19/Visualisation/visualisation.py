@@ -31,14 +31,14 @@ def agentPortrayal(agent):
 
 
     #maybe a switch statment here?
-    if agent.infected == False and agent.dead == False:
-        portrayal["Color"] = "gold"
+    if agent.infected == False and agent.dead == False and agent.immune == False:
+        portrayal["Color"] = "#00998F" # turqoise
     elif agent.infected == True and agent.dead == False and agent.immune == False:
-        portrayal["Color"] = "red"
+        portrayal["Color"] = "#FF0010" # bright red
     elif agent.dead == True:
         return
-    elif agent.immune == True:
-        portrayal["Color"] = "purple"
+    elif agent.immune == True and agent.dead == False and agent.infected == False:
+        portrayal["Color"] = "#740AFF" # violet
 
     return portrayal
 
@@ -52,7 +52,7 @@ def cellPortrayal(building):
         "Color" : "green"
     }
     if type(building) == Misc:
-        portrayal["Color"] = "purple"
+        portrayal["Color"] = "#FFA8BB"
     elif type(building) == Home:
         portrayal["Color"] = "orange"
     elif type(building) == Hospital:
