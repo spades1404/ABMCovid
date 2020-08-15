@@ -47,6 +47,7 @@ def diseaseProgression(agent):
             agent.model.currentInfected -= 1
             agent.infected = False
             agent.isolating = False
+
             agent.tested = False
             if agent.hospitalized == True:
                 agent.hospitalized = False
@@ -70,8 +71,9 @@ def diseaseProgression(agent):
                     agent.model.immune += 1
                     agent.carrier = True
                 else:
-                    agent.progression = 0
-                    agent.ticksSinceInfection = 0
+                    return
+                    # agent.progression = 0
+                    # agent.ticksSinceInfection = 0
 
 
 
