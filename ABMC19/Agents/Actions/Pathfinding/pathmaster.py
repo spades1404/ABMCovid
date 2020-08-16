@@ -21,7 +21,7 @@ def moveAgent(agent): #THIS IS ONLY FOR PATHFINDING AND MOVING - IVE SEPARATED A
         agent.model.grid.move_agent(agent,nearestOneCoords(possibleMoves,agent.currentDestCoord))
         return
     else:#move to the closest one
-        agent.model.grid.move_agent(agent,filteredMoves[0])
+        agent.model.grid.move_agent(agent,nearestOneCoords(filteredMoves,agent.currentDestCoord))
         return
 
 
