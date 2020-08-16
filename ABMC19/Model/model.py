@@ -25,7 +25,9 @@ class covidModel(Model):
                  chanceEssentialMovement = 0.5,
                  chanceMask = 0.5,
                  contactTracing = False, #contact tracing is experimental
-                 lockdown = False ##lockdown in threshholds
+                 lockdown = True, ##lockdown in threshholds
+                 lockdownThreshold = 40, #the threshold for activating lockdown
+                 lockdownSafetyDayThreshold = 50, #number of days that the threshhold must be below the threshold for lockdown to be lifted
                  ):
 
         super(covidModel, self).__init__()
@@ -36,8 +38,12 @@ class covidModel(Model):
         self.schedule = RandomActivation(self) #Creating Scheduler
         self.grid = MultiGrid(widthAndHeight,widthAndHeight,torus=True) #Creating the Grid
 
-        self.contactTracing = contactTracing
-        self.lockdown = lockdown
+        self.contactTracingOn = contactTracing
+        self.lockdownOn = lockdown
+        self.inLockdown = False
+        self.lockdownThreshold = lockdownThreshold
+        self.lockdownDayLift = lockdownSafetyDayThreshold
+        #self.fastTest = fastTest #going to add very fast testing in the future
 
         ##############Agent P Values#################
 
@@ -51,6 +57,7 @@ class covidModel(Model):
         self.deaths = 0 #will show total deaths
         self.currentInfected = startingInfected #will show number of infected agents for one tick
         self.immune = 0 #will show total immune ppl
+        self.knownInfected = 0 #this tracks the known infected by the models authorities - since you only know if someone is infected after testing them
 
         #For visualisation
         self.running = True
@@ -86,8 +93,8 @@ class covidModel(Model):
                 "Deaths" : "deaths", #tracks total deaths
                 "Current Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
-                "Reproduction Rate" : Rrate
-
+                "Reproduction Rate" : Rrate,
+                "Known Infected" : "knownInfected"
             }
         )
 
@@ -100,6 +107,8 @@ class covidModel(Model):
         if self.currentInfected == 0:  # this means there is no more chance the disease will spread
             self.running = False #then we will stop the visual model
 
+        if self.lockdownOn == True:
+            self.checkLockdownStatus()
 
         # print("Rate", Rrate(self))
         self.schedule.step() # do a step
@@ -107,6 +116,9 @@ class covidModel(Model):
         self.datacollector.collect(self) # collect our data
 
         updateDirtyCells(self)
+
+
+
 
 
 
@@ -119,6 +131,12 @@ class covidModel(Model):
                 for j in self.allSpecialAreas[i]:
                     if (x,y) in j.location:
                         return j
+
+    def checkLockdownStatus(self):
+        if self.currentInfected > self.lockdownThreshold:
+            self.inLockdown = True
+        elif [True if i < self.lockdownThreshold else False for i in (list(self.datacollector.get_model_vars_dataframe()["Current Infected"][-self.lockdownDayLift:]))] == [True for i in range(self.lockdownDayLift)]:
+            self.inLockdown = False
 
     def removeAgent(self,agent):
         self.schedule.remove(agent)

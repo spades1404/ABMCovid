@@ -1,9 +1,9 @@
 from mesa.visualization.UserParam import UserSettableParameter
 
 from ABMC19.Libs.Mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
-from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import ChartModule, TextElement
 from ABMC19.Model.model import *
+from ABMC19.Libs.Mesa.visualization.ModularVisualization import ModularServer
+from ABMC19.Libs.Mesa.visualization.modules import ChartModule, TextElement
 
 from ABMC19.Model.SpecialCoords.misc import Misc
 from ABMC19.Model.SpecialCoords.hospital import Hospital
@@ -19,6 +19,30 @@ class MyTextElement(TextElement):
         rval = Rrate(model)
         text_r = "{:.2f}".format(rval)
         return f"R Value: {text_r}"
+
+class staticTextElement(TextElement):
+    def __init__(self,model):
+        self.model = model
+        return
+    def render(self,model):
+        return('''
+        Buildings => Squares\n
+        Agents => Circles\n
+        
+        Buildings:\n
+        ORANGE > Homes\n
+        CYAN > Hospitals\n
+        YELLOW > Shops\n
+        GREEN > Business (other than shops and misc areas)\n
+        LIGHT PINK > Misc Areas (Mainly leisure - gyms, unessential shops etc)\n
+        
+        Agents:\n
+        TURQOISE > Normal\n
+        RED > Infected\n
+        VIOLET > Immune\n
+        *DEAD AGENTS ARE REMOVED FROM MODEL*\n
+        ''')
+
 
 def agentPortrayal(agent):
     portrayal = {
@@ -140,6 +164,34 @@ def startVisuals(widthHeight = 100,
             0.1,  # Increment by
             description="Choose hygenic agents at start",
         ),
+        "contactTracing" : UserSettableParameter(
+            "checkbox",
+            "Contact Tracing",
+            False,
+        ),
+        "lockdown" : UserSettableParameter(
+            "checkbox",
+            "Lockdown",
+            False
+        ),
+        "lockdownThreshold" : UserSettableParameter(
+            "slider",
+            "Lockdown Activation Threshold",
+            35,
+            0,
+            100,
+            1,
+            "The threshold of infected agents at which lockdown is activated if above and deactiveated if below"
+        ),
+        "lockdownSafetyDayThreshold" : UserSettableParameter(
+            "slider",
+            "Lockdown Deactivation Tick Limit",
+            40,
+            40,
+            300,
+            1,
+            "The number of ticks that the current infected agents has to be below for lockdown to be lifted"
+        )
     }
 
     server = ModularServer(
@@ -149,6 +201,7 @@ def startVisuals(widthHeight = 100,
             MyTextElement(covidModel),
             chart([{"Label": "Current Infected", "Color": "Red"}]),
             chart([{"Label": "Deaths", "Color": "Black"},{"Label": "Immune", "Color": "Purple"}]),
+            #staticTextElement(covidModel) This element doesnt work - try find a way to do it
         ],
         "Covid Model",
         model_params

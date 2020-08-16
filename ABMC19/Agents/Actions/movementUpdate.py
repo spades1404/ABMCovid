@@ -8,6 +8,23 @@ def updateMovementDir(agent):
             if agent.tested == False:
                 f[0].test(agent)  # this tests the agent for covid
             return False
+
+    if agent.model.inLockdown == True and agent.hospitalized == False and agent.infected == False:
+        if agent.infected == False:
+            if agent.pos in [i for i in agent.home.location]:
+                return False
+            else:
+                agent.movementDir = 1
+                return True
+        elif agent.infected == True:
+            if random.random() > 0.5: #50% chance they will go home, otherwise they may go to hospital by activating below statement or they may do nothing
+                if agent.pos in [i for i in agent.home.location]:
+                    return False
+                else:
+                    agent.movementDir = 1
+                    return True
+
+
     if agent.progression == 2 and agent.tested == False:
         ########Check if they are at hospital (andf if they need a test)
 
@@ -40,7 +57,6 @@ def chooseNewDir(agent): #We can update this later so theres higher chances of g
 
     dataSet1 = [0.4,0,0.2,0.4] #standard movement - going work is 40% going food shop is 30% and going out for fun or other misc activities is 40% (home is 0% since its only activated when at home)
     dataSet2 = [0.4,0.4,0.2,0] #when doing essential movement only - staying at home also has a chance now
-    dataSet3 = [0.45,0.45,0.1,0] #potential set for lockdown scenario
 
 
     inUseSet = []

@@ -118,14 +118,12 @@ class covAgent(Agent):
 
 
     def step(self):
-
-        contactedAgents(self) #adds contacted agents if we are infected
-
-        cellInfector(self) #Checking if we have left any reminants of the disease behind
-
-        covidComparison(self) #comparisons with nearby agents to see if weve caught the disease
-
-        diseaseProgression(self)#then we will self check the progression of our disease
+        if self.infected == False:
+            covidComparison(self)  # comparisons with nearby agents to see if weve caught the disease
+        else:
+            contactedAgents(self) #adds contacted agents if we are infected
+            cellInfector(self) #Checking if we have left any reminants of the disease behind
+            diseaseProgression(self)#then we will self check the progression of our disease
 
         if updateMovementDir(self) == True: #this func will tell us if we should move
             moveAgent(self)

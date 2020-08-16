@@ -3,7 +3,7 @@ import random
 
 class Hospital(aoi):
     def __init__(self,model):
-        super(Hospital, self).__init__(capacity=200,model=model,oneCell=False)
+        super(Hospital, self).__init__(capacity=500,model=model,oneCell=False)
         self.occupants = [] #tracks who is in hospital #not sure if neccessary
 
     def admit(self,agent):
@@ -26,8 +26,11 @@ class Hospital(aoi):
             agent.movementDir = 1 #send them home
 
         if random.random() > 0.3: #test accuracy is 70%
-            if agent.model.contactTracing == True:
+            agent.model.knownInfected += 1
+
+            if agent.model.contactTracingOn == True:
                 self.contactTracing(agent)
+
             if self.currentCapacity <= 0: #we will try find them another hospital if we cant accomodate
                 for i in agent.model.allSpecialAreas["hospitals"]:
                     if i.currentCapacity > 0:

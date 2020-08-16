@@ -76,14 +76,14 @@ def offsetCoords(shape,model):
     print(shape)
 
     if maxX + 1 > model.gridWidth:
-        shape = [i[0]-1 for i in shape]
+        shape = [(i[0]-1,i[1]) for i in shape]
     else:
-        shape = [i[0]+1 for i in shape]
+        shape = [(i[0]+1,i[1]) for i in shape]
 
     if maxY + 1 > model.gridHeight:
-        shape = [i[1] - 1 for i in shape]
+        shape = [(i[0],i[1]-1) for i in shape]
     else:
-        shape = [i[1] + 1 for i in shape]
+        shape = [(i[0],i[1]+1) for i in shape]
 
     return shape
 
@@ -109,6 +109,7 @@ def tetromino(model): #thought this sounded catchier than grucLarge xd
             continue
 
     for i in coordSet:
+        model.fullCoords = list(model.fullCoords)
         model.fullCoords.append(i)
     return coordSet
 
