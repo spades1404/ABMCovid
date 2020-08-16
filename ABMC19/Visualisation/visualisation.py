@@ -20,30 +20,6 @@ class MyTextElement(TextElement):
         text_r = "{:.2f}".format(rval)
         return f"R Value: {text_r}"
 
-class staticTextElement(TextElement):
-    def __init__(self,model):
-        self.model = model
-        return
-    def render(self,model):
-        return('''
-        Buildings => Squares\n
-        Agents => Circles\n
-        
-        Buildings:\n
-        ORANGE > Homes\n
-        CYAN > Hospitals\n
-        YELLOW > Shops\n
-        GREEN > Business (other than shops and misc areas)\n
-        LIGHT PINK > Misc Areas (Mainly leisure - gyms, unessential shops etc)\n
-        
-        Agents:\n
-        TURQOISE > Normal\n
-        RED > Infected\n
-        VIOLET > Immune\n
-        *DEAD AGENTS ARE REMOVED FROM MODEL*\n
-        ''')
-
-
 def agentPortrayal(agent):
     portrayal = {
         "Shape": "circle",
@@ -105,6 +81,28 @@ def startVisuals(widthHeight = 100,
 
     model_params = {
         "widthAndHeight" : widthHeight,
+        "key": UserSettableParameter(
+            "static_text",
+            value=
+            '''
+            <h4>Buildings: Squares</h1>
+            <p style="font-size:16px;">
+              <span style="color: orange">Homes</span><br> 
+              <span style="color: #F2C800">Shops</span><br>
+              <span style="color: green">Business</span><br>
+              <span style="color: #00D6D6">Hospitals</span><br>
+              <span style="color: #F19CBB">Misc Areas (libraries, gyms, etc.)</span> 
+            </p>
+
+            <h4>Agents: Circles</h1>
+            <p style="font-size:16px;" >
+              <span style="color: #00998F">Susceptible</span><br> 
+              <span style="color: #FF0010">Infected</span><br>
+              <span style="color: #740AFF">Immune</span><br>
+              Dead (removed from the model)
+            </p>
+            '''
+        ),
         "numAgents": UserSettableParameter(
             "slider",
             "Number of agents",
@@ -191,7 +189,8 @@ def startVisuals(widthHeight = 100,
             300,
             1,
             "The number of ticks that the current infected agents has to be below for lockdown to be lifted"
-        )
+        ),
+
     }
 
     server = ModularServer(
@@ -201,7 +200,6 @@ def startVisuals(widthHeight = 100,
             MyTextElement(covidModel),
             chart([{"Label": "Current Infected", "Color": "Red"}]),
             chart([{"Label": "Deaths", "Color": "Black"},{"Label": "Immune", "Color": "Purple"}]),
-            #staticTextElement(covidModel) This element doesnt work - try find a way to do it
         ],
         "Covid Model",
         model_params

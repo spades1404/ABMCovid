@@ -28,6 +28,7 @@ class covidModel(Model):
                  lockdown = True, ##lockdown in threshholds
                  lockdownThreshold = 40, #the threshold for activating lockdown
                  lockdownSafetyDayThreshold = 50, #number of days that the threshhold must be below the threshold for lockdown to be lifted
+                 key=None
                  ):
 
         super(covidModel, self).__init__()
@@ -43,6 +44,7 @@ class covidModel(Model):
         self.inLockdown = False
         self.lockdownThreshold = lockdownThreshold
         self.lockdownDayLift = lockdownSafetyDayThreshold
+        self.key = key
         #self.fastTest = fastTest #going to add very fast testing in the future
 
         ##############Agent P Values#################
