@@ -1,4 +1,3 @@
-import random
 import numpy
 
 def updateMovementDirection(agent):
@@ -28,7 +27,6 @@ def chooseNewDir(agent): #We can update this later so theres higher chances of g
     else:
         inUseSet = dataSet1
     while True:
-        #x = random.randint(0, 4)
 
         x = (numpy.random.choice(numpy.arange(0,5), p = inUseSet))
         if x == agent.movementDir:

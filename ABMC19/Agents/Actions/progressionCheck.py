@@ -10,11 +10,11 @@ def diseaseProgression(agent):
 
     if agent.progression == 1:
         dayProg = tsi #currentDay of disease
-        randProgressionDate = random.normalvariate(11.5,2) #setting this as a random day in which the disease will progress
+        randProgressionDate = random.normalvariate(5.1,2.5) #setting this as a random day in which the disease will progress
         for i in range(agent.highRisks):
-                dayProg *= 1.1 #going to say that it accelerates the progression by 10% THIS CAN BE CHANGED TO ADD A DAY OR SOMETHING DIFFERENT
+                dayProg *= 1.5 #going to say that it accelerates the progression by 50% THIS CAN BE CHANGED TO ADD A DAY OR SOMETHING DIFFERENT
         for i in range(agent.moderateRisks):
-                dayProg *= 1.05 #same thing but increases 5%
+                dayProg *= 1.1 #same thing but increases 5%
         #by multiplying the tsi it makes the progression exponentially worse if you have a risk factor
 
         if dayProg >= randProgressionDate:
@@ -22,24 +22,25 @@ def diseaseProgression(agent):
 
     elif agent.progression == 2:
         dayProg = tsi  # currentDay of disease
-        randProgressionDate = random.normalvariate(24,2)  # setting this as a random day in which the disease will progress
+        randProgressionDate = random.normalvariate(21,7)  # setting this as a random day in which the disease will progress
         for i in range(agent.highRisks):
-                dayProg *= 1.1  # going to say that it accelerates the progression by 10% THIS CAN BE CHANGED TO ADD A DAY OR SOMETHING DIFFERENT
+                dayProg *= 1.5  # going to say that it accelerates the progression by 10% THIS CAN BE CHANGED TO ADD A DAY OR SOMETHING DIFFERENT
         for i in range(agent.moderateRisks):
-                dayProg *= 1.05  # same thing but increases 5%
+                dayProg *= 1.1  # same thing but increases 5%
         # by multiplying the tsi it makes the progression exponentially worse if you have a risk factor
 
         if dayProg >= randProgressionDate:
 
-            cfr = random.random()
+            cfr = 0.01
+            x = random.random()
 
             for i in range(agent.highRisks):
-                    cfr += 0.1 #being high risk increases risk of death by 10%
+                    cfr += 0.2 #being high risk increases risk of death by 20%
             for i in range(agent.moderateRisks):
                     cfr += 0.05 #being moderate risk increases risk of death by 5%
 
             if agent.hospitalized == True:
-                cfr -= 0.3 #being in hospital reduces chance of death by 30%
+                cfr -= 0.5 #being in hospital reduces chance of death by 50%
 
 
 
@@ -54,7 +55,7 @@ def diseaseProgression(agent):
                 agent.hospital.release(agent)
 
 
-            if cfr > 0.9: #10% chance of death
+            if x < cfr:
                 agent.model.deaths += 1
                 agent.dead = True
                 agent.model.removeAgent(agent)
@@ -63,17 +64,14 @@ def diseaseProgression(agent):
 
                 randomChance = random.uniform(0,1)
 
-                if agent.numberOfTimesInfected > 1:
-                    randomChance += 0.15
-
-                if randomChance > 0.9: #10 percent chance of immunity
+                if randomChance > 0.8: #80 percent chance of immunity
                     agent.immune = True
                     agent.model.immune += 1
                     agent.carrier = True
                 else:
+                    agent.progression = 0
+                    agent.ticksSinceInfection = 0
                     return
-                    # agent.progression = 0
-                    # agent.ticksSinceInfection = 0
 
 
 

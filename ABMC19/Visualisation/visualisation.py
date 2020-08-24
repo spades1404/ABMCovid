@@ -9,7 +9,6 @@ from ABMC19.Model.SpecialCoords.misc import Misc
 from ABMC19.Model.SpecialCoords.hospital import Hospital
 from ABMC19.Model.SpecialCoords.home import Home
 from ABMC19.Model.SpecialCoords.shops import Shop
-from ABMC19.Model.SpecialCoords.businesses import Business
 
 
 class MyTextElement(TextElement):
@@ -59,8 +58,6 @@ def cellPortrayal(building):
         portrayal["Color"] = "cyan"
     elif type(building) == Shop:
         portrayal["Color"] = "yellow"
-    elif type(building) == Business:
-        portrayal["Color"] = "green"
 
     return portrayal
 
@@ -89,7 +86,6 @@ def startVisuals(widthHeight = 100,
             <p style="font-size:16px;">
               <span style="color: orange">Homes</span><br> 
               <span style="color: #F2C800">Shops</span><br>
-              <span style="color: green">Business</span><br>
               <span style="color: #00D6D6">Hospitals</span><br>
               <span style="color: #F19CBB">Misc Areas (libraries, gyms, etc.)</span> 
             </p>

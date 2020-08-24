@@ -54,8 +54,8 @@ class covAgent(Agent):
         ###Characteristics###
 
         #BASIC CHARACTERISTICS#
-        self.gender = RTF(0.51) #TRUE = MEN FALSE = WOMEN
-        self.bmi = obesityDef()
+        self.gender = RTF(0.49) #TRUE = MEN FALSE = WOMEN
+        self.obese = RTF(0.287)
         self.age = ageDef()
         self.bame = RTF(0.13) #True = yes false = no
 
@@ -63,7 +63,7 @@ class covAgent(Agent):
         self.transplant = RTF(0.000015)
         self.cancer = RTF(0.0055)
         if self.gender == False:
-            self.pregnant = RTF(0.025)
+            self.pregnant = RTF(0.05)
         else:
             self.pregnant = False
 
@@ -78,7 +78,7 @@ class covAgent(Agent):
         self.diabetes = RTF(0.0625)
 
         self.moderateRisks = 0
-        for i in [self.badLung,self.badHeart,self.diabetes,[True if self.bmi > 30 else False],[True if self.age > 50 else False],self.bame]:
+        for i in [self.badLung,self.badHeart,self.diabetes,self.obese,[True if self.age > 50 else False],self.bame]:
             if i == True:
                 self.moderateRisks += 1
 

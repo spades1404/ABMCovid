@@ -3,7 +3,7 @@ import random
 
 class Hospital(aoi):
     def __init__(self,model):
-        super(Hospital, self).__init__(capacity=500,model=model,oneCell=False)
+        super(Hospital, self).__init__(capacity=136,model=model,oneCell=False)
         self.occupants = [] #tracks who is in hospital #not sure if neccessary
 
     def admit(self,agent):
