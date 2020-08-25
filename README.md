@@ -1,5 +1,8 @@
 This is a repository for the ABM for CoViD-19 codebase. 
 For Nuffield Research.
-<b>You will find all the code for this project in the ABMC19 folder.</b>
-<b>Use runIDLE if running from standard python idle, use run in the ABMC19 folder if using pycharm</b>
-<B>The ABMC19Release folder has an exe in it for simple use, aswell as a windows installer for your machine</b>
+All the code for this project is located in the ABMC19 FOLDER
+Installers and exe files can be found in the ABMC19 Release folders.
+All other folders in the master dir are related to development
+
+<b>INSTALLATION</b>
+Visit this link , https://drive.google.com/file/d/10dILUZJjNS3x6oR7yMPUHGrewUx7XGTZ/view?usp=sharing , and download the installer and run. You a shortcut on your desktop will be created for the program.
