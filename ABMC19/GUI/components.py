@@ -1,21 +1,26 @@
 from tkinter import *
 
 
-def genLabel(main,text):
+def genLabel(main,
+             text,
+             width = 30,
+             height = 2,
+             bg = "black",
+             fg = "white"):
     return Label(
-        main.main,
-        width = 20,
-        height = 2,
+        main,
+        width = width,
+        height = height,
         borderwidth = 1,
         text = text,
         relief = "ridge",
-        bg = "black",
-        fg = "white"
+        bg = bg,
+        fg = fg
     )
 
 def genButt(main,text,command):
     return Button(
-        main.main,
+        main,
         text = text,
         command = command,
         width = 30
@@ -23,7 +28,7 @@ def genButt(main,text,command):
 
 def genTxtBox(main):
     return Text(
-        main.main,
+        main,
         width = 20,
         height = 2,
         relief = "sunken",

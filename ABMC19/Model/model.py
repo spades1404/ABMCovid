@@ -10,7 +10,7 @@ from ABMC19.Model.CoordinateScripts.generateSpecialAreas import *
 from ABMC19.Model.Initiallization.initAgents import generateAgents
 from ABMC19.Model.Initiallization.setInfected import setInfecteed
 from ABMC19.Model.CoordinateScripts.generateHubs import generateHubs
-from ABMC19.Model.DataCollectors.Rrate import Rrate
+from ABMC19.Model.DataCollectors.collectors import Rrate
 from ABMC19.Model.CoordinateScripts.updateDirtyCells import updateDirtyCells
 
 
@@ -26,7 +26,7 @@ class covidModel(Model):
                  chanceMask = 0.5,
                  contactTracing = False, #contact tracing is experimental
                  lockdown = True, ##lockdown in threshholds
-                 lockdownThreshold = 40, #the threshold for activating lockdown
+                 lockdownThreshold = 100, #the threshold for activating lockdown
                  lockdownSafetyDayThreshold = 50, #number of days that the threshhold must be below the threshold for lockdown to be lifted
                  key=None
                  ):

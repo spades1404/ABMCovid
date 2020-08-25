@@ -26,19 +26,6 @@ if sys.version_info[1] == 8:
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())  #This handles an error that occurs only with python 3.8
 
 
+gui()
 
 
-#if you want gui setup
-#mainWin()
-
-#Uncomment this for manual use with no GUI
-
-#model = covidModel(2,2,2,1)
-#while model.running == True:
-#    model.step()
-
-#just visuals
-startVisuals() # gridx,gridy,num agents, num infected
-
-#batchRunning
-#batchRun()

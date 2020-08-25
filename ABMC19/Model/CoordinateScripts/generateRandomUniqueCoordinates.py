@@ -73,7 +73,6 @@ def skew(coord):
 def offsetCoords(shape,model):
     maxX = max([i[0] for i in shape])
     maxY = max([i[1] for i in shape])
-    print(shape)
 
     if maxX + 1 > model.gridWidth:
         shape = [(i[0]-1,i[1]) for i in shape]
