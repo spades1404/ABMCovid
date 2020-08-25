@@ -18,7 +18,9 @@ from ABMC19.Model.model import *
 from ABMC19.GUI.gui import *
 from ABMC19.Visualisation.visualisation import *
 from ABMC19.batchrun import batchRun
+from ABMC19.info import printInfo
 
+import mesa
 import sys
 import asyncio
 
@@ -26,6 +28,9 @@ if sys.version_info[1] == 8:
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())  #This handles an error that occurs only with python 3.8
 
 
+
+
 gui()
 
 
+print("VERSION 4.0")

@@ -1,9 +1,11 @@
 from mesa.visualization.UserParam import UserSettableParameter
 
-from ABMC19.Libs.Mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
+
 from ABMC19.Model.model import *
-from ABMC19.Libs.Mesa.visualization.ModularVisualization import ModularServer
-from ABMC19.Libs.Mesa.visualization.modules import ChartModule, TextElement
+
+from ABMC19.Libs.Mesa.visualization.modules.CanvasGridVisualization import CanvasGrid
+from mesa.visualization.ModularVisualization import ModularServer
+from mesa.visualization.modules import ChartModule, TextElement
 
 from ABMC19.Model.SpecialCoords.misc import Misc
 from ABMC19.Model.SpecialCoords.hospital import Hospital
