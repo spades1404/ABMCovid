@@ -6,3 +6,5 @@ All other folders in the master dir are related to development
 
 <b>INSTALLATION</b>
 Visit this link , https://drive.google.com/file/d/10dILUZJjNS3x6oR7yMPUHGrewUx7XGTZ/view?usp=sharing , and download the installer and run. You a shortcut on your desktop will be created for the program.
+
+Also the project is open-source so if you dont like something, want to extract some different data or redesign something for yourself , do it!
