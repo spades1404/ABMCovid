@@ -19,16 +19,17 @@ class Hospital(aoi):
         agent.hospital = []
         agent.movementDir = 1
 
-    def test(self,agent):
+    def test(self,agent,recursive=False):
         agent.tested = True
         if agent.infected == False:
             agent.traced = False
             agent.movementDir = 1 #send them home
 
         if random.random() > 0.3: #test accuracy is 70%
+
             agent.model.knownInfected += 1
 
-            if agent.model.contactTracingOn == True:
+            if agent.model.contactTracingOn == True and recursive == False:
                 self.contactTracing(agent)
 
             if self.currentCapacity <= 0: #we will try find them another hospital if we cant accomodate
@@ -39,7 +40,7 @@ class Hospital(aoi):
                         break
                 #these two lines only occur if the for loop didnt find anything
                 agent.isolated = True
-                agent.movementDir = 1
+                agent.model.grid.move_agent(agent,random.choice(agent.home.location))
             else:
                 self.admit(agent)
         else:
@@ -59,9 +60,11 @@ class Hospital(aoi):
                 contacted.append(i)
 
 
+        if agent.traced == True:
+            return
 
         for i in contacted:
-            if random.random() > 0.5: #50 percent chance they ignore it
-                i.movementDir = 4
-                i.traced = True
+            i.traced = True
+            i.model.grid.move_agent(i, random.choice(self.location))
+            self.test(i,recursive=True)
 

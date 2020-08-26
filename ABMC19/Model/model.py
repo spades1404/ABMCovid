@@ -42,6 +42,7 @@ class covidModel(Model):
         self.contactTracingOn = contactTracing
         self.lockdownOn = lockdown
         self.inLockdown = False
+        self.lockdownoccured=False
         self.lockdownThreshold = lockdownThreshold
         self.lockdownDayLift = lockdownSafetyDayThreshold
         self.key = key
@@ -90,13 +91,21 @@ class covidModel(Model):
 
 
         #For data collector
+
+        self.currentInfectedTimeline = []
+        self.deathTimeline = []
+        self.immuneTimeline = []
+
         self.datacollector = DataCollector(
             model_reporters={
                 "Deaths" : "deaths", #tracks total deaths
                 "Current Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
                 "Reproduction Rate" : Rrate,
-                "Known Infected" : "knownInfected"
+                "Known Infected" : "knownInfected",
+                "citl" : "currentInfectedTimeline",
+                "dtl" : "deathTimeLine",
+                "itl" : "immuneTimeline"
             }
         )
 
@@ -114,14 +123,12 @@ class covidModel(Model):
 
         # print("Rate", Rrate(self))
         self.schedule.step() # do a step
-
         self.datacollector.collect(self) # collect our data
-
         updateDirtyCells(self)
 
-
-
-
+        self.currentInfectedTimeline.append(self.currentInfected)
+        self.deathTimeline.append(self.deaths)
+        self.immuneTimeline.append(self.immune)
 
 
     def returnCellBuildings(self,x,y):
@@ -135,10 +142,13 @@ class covidModel(Model):
                         return j
 
     def checkLockdownStatus(self):
+        if self.lockdownoccured == True:
+            return
         if self.currentInfected > self.lockdownThreshold:
             self.inLockdown = True
         elif [True if i < self.lockdownThreshold else False for i in (list(self.datacollector.get_model_vars_dataframe()["Current Infected"][-self.lockdownDayLift:]))] == [True for i in range(self.lockdownDayLift)]:
             self.inLockdown = False
+            self.lockdownoccured = True
 
     def removeAgent(self,agent):
         self.schedule.remove(agent)

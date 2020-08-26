@@ -175,17 +175,17 @@ def startVisuals(widthHeight = 100,
             "Lockdown Activation Threshold",
             35,
             0,
-            100,
-            1,
+            1000,
+            10,
             "The threshold of infected agents at which lockdown is activated if above and deactiveated if below"
         ),
         "lockdownSafetyDayThreshold" : UserSettableParameter(
             "slider",
             "Lockdown Deactivation Tick Limit",
-            40,
-            40,
-            300,
-            1,
+            500,
+            250,
+            1500,
+            50,
             "The number of ticks that the current infected agents has to be below for lockdown to be lifted"
         ),
 
@@ -206,4 +206,4 @@ def startVisuals(widthHeight = 100,
     server.port = 8521
     server.launch()
 
-#startVisuals(50,50,20,1)
+startVisuals()

@@ -15,3 +15,9 @@ def returnDeath(model):
 def returnImmune(model):
     return model.immune
 
+def returndtl(model):
+    return model.deathTimeline
+def returncitl(model):
+    return model.currentInfectedTimeline
+def returnitl(model):
+    return model.immuneTimeline

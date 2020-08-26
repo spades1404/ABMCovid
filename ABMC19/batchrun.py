@@ -2,6 +2,9 @@ from ABMC19.Libs.Mesa.batchrunner import BatchRunner
 from ABMC19.Model.model import covidModel
 from ABMC19.Model.DataCollectors.collectors import *
 import matplotlib.pyplot as plt
+import pandas
+import openpyxl
+
 def batchRun(
         grid,
         dist,
@@ -30,7 +33,10 @@ def batchRun(
     modelReporters = {
         "Deaths": returnDeath,  # tracks total deaths
         "Immune": returnImmune,  # tracks total immune
-        "Reproduction Rate": Rrate
+        "Reproduction Rate": Rrate,
+        "dtl" : returndtl,
+        "citl" : returncitl,
+        "itl" : returnitl
     }
 
     batchRun = BatchRunner(
@@ -46,23 +52,34 @@ def batchRun(
     runData.head()
     print(runData.columns)
     print(runData)
-    #plt.scatter(runData["Run"],runData["Reproduction Rate"])
-    plt.subplot(1,2,1)
-    plt.scatter(runData["numAgents"],runData["Deaths"])
-    plt.title("Deaths")
-    plt.subplot(1,2,2)
-    plt.scatter(runData["numAgents"],runData["Immune"])
-    plt.title("Immune")
-
-    #plt.plot(runData["Run"], runData["Immune"])
-
-    plt.show()
-
+    runData.to_excel("output.xlsx")
 
 
 
     return runData
 
-#batchRun(
-#    20,1,1,1,1,1,False,False,range(10,100,10)
-#)
+
+batchRun(
+    100,1,1,1,1,1,True,False,range(100,1050,50)
+)
+
+
+def listAverager(lol):
+    length = len(lol[0])
+    x = []
+    for i in range(length):
+        f = []
+        for k in lol:
+            f.append(k[i])
+
+        z = 0
+        for j in f:
+            z+=j
+
+        z /= len(f)
+        x.append(z)
+
+    return x
+
+
+

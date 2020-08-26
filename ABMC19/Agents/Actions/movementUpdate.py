@@ -2,12 +2,12 @@ import random
 import numpy
 
 def updateMovementDir(agent):
-    if agent.traced == True: #if they have been contact traced, check if they are at the hospital and test them
-        f = [i for i in agent.model.allSpecialAreas["hospitals"] if agent.pos in i.location]
-        if f != []:
-            if agent.tested == False:
-                f[0].test(agent)  # this tests the agent for covid
-            return False
+    # if agent.traced == True: #if they have been contact traced, check if they are at the hospital and test them
+    #     f = [i for i in agent.model.allSpecialAreas["hospitals"] if agent.pos in i.location]
+    #     if f != []:
+    #         if agent.tested == False:
+    #             f[0].test(agent)  # this tests the agent for covid
+    #         return False
 
     if agent.model.inLockdown == True and agent.hospitalized == False and agent.infected == False:
         if agent.infected == False:
