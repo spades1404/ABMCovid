@@ -42,12 +42,8 @@ class covidModel(Model):
         self.contactTracingOn = contactTracing
         self.lockdownOn = lockdown
         self.inLockdown = False
-<<<<<<< Updated upstream
-        self.lockdownThreshold = lockdownThreshold
-=======
         self.lockdownoccured=False
         self.lockdownThreshold = round(numAgents*0.1)
->>>>>>> Stashed changes
         self.lockdownDayLift = lockdownSafetyDayThreshold
         self.key = key
         #self.fastTest = fastTest #going to add very fast testing in the future
