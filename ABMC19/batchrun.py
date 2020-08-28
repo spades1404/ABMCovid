@@ -46,6 +46,7 @@ def batchRun(
     runData.head()
     print(runData.columns)
     print(runData)
+<<<<<<< Updated upstream
     #plt.scatter(runData["Run"],runData["Reproduction Rate"])
     plt.subplot(1,2,1)
     plt.scatter(runData["numAgents"],runData["Deaths"])
@@ -53,11 +54,24 @@ def batchRun(
     plt.subplot(1,2,2)
     plt.scatter(runData["numAgents"],runData["Immune"])
     plt.title("Immune")
+=======
+    return runData
+
+
+>>>>>>> Stashed changes
 
     #plt.plot(runData["Run"], runData["Immune"])
 
+<<<<<<< Updated upstream
     plt.show()
 
+=======
+'''
+batchRun(
+    100,1,1,1,1,1,True,False,range(100,1050,50)
+)
+'''
+>>>>>>> Stashed changes
 
 
 

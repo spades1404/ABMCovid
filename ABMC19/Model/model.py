@@ -26,8 +26,8 @@ class covidModel(Model):
                  chanceMask = 0.5,
                  contactTracing = False, #contact tracing is experimental
                  lockdown = True, ##lockdown in threshholds
-                 lockdownThreshold = 100, #the threshold for activating lockdown
-                 lockdownSafetyDayThreshold = 50, #number of days that the threshhold must be below the threshold for lockdown to be lifted
+                 #lockdownThreshold = 100, #the threshold for activating lockdown
+                 lockdownSafetyDayThreshold = 1500, #number of days that the threshhold must be below the threshold for lockdown to be lifted
                  key=None
                  ):
 
@@ -42,7 +42,12 @@ class covidModel(Model):
         self.contactTracingOn = contactTracing
         self.lockdownOn = lockdown
         self.inLockdown = False
+<<<<<<< Updated upstream
         self.lockdownThreshold = lockdownThreshold
+=======
+        self.lockdownoccured=False
+        self.lockdownThreshold = round(numAgents*0.1)
+>>>>>>> Stashed changes
         self.lockdownDayLift = lockdownSafetyDayThreshold
         self.key = key
         #self.fastTest = fastTest #going to add very fast testing in the future
