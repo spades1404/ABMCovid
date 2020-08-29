@@ -64,7 +64,7 @@ def diseaseProgression(agent):
 
                 randomChance = random.uniform(0,1)
 
-                if randomChance > 0.8: #80 percent chance of immunity
+                if randomChance > 0.2: #80 percent chance of immunity
                     agent.immune = True
                     agent.model.immune += 1
                     agent.carrier = True

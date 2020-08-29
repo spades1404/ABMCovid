@@ -26,9 +26,9 @@ class covidModel(Model):
                  chanceMask = 0.5,
                  contactTracing = False, #contact tracing is experimental
                  lockdown = True, ##lockdown in threshholds
-                 lockdownThreshold = 100, #the threshold for activating lockdown
-                 lockdownSafetyDayThreshold = 50, #number of days that the threshhold must be below the threshold for lockdown to be lifted
-                 key=None
+                 #lockdownThreshold = 100, #the threshold for activating lockdown
+                 lockdownSafetyDayThreshold = 1500, #number of days that the threshhold must be below the threshold for lockdown to be lifted
+                 #key=None
                  ):
 
         super(covidModel, self).__init__()
@@ -42,9 +42,10 @@ class covidModel(Model):
         self.contactTracingOn = contactTracing
         self.lockdownOn = lockdown
         self.inLockdown = False
-        self.lockdownThreshold = lockdownThreshold
+        self.lockdownoccured=False
+        self.lockdownThreshold = round(numAgents*0.1)
         self.lockdownDayLift = lockdownSafetyDayThreshold
-        self.key = key
+        #self.key = key
         #self.fastTest = fastTest #going to add very fast testing in the future
 
         ##############Agent P Values#################
@@ -60,7 +61,7 @@ class covidModel(Model):
         self.currentInfected = startingInfected #will show number of infected agents for one tick
         self.immune = 0 #will show total immune ppl
         self.knownInfected = 0 #this tracks the known infected by the models authorities - since you only know if someone is infected after testing them
-
+        self.totalInfected = startingInfected
         #For visualisation
         self.running = True
 
@@ -96,7 +97,8 @@ class covidModel(Model):
                 "Current Infected" : "currentInfected", #tracks current tick infections
                 "Immune" : "immune", #tracks total immune
                 "Reproduction Rate" : Rrate,
-                "Known Infected" : "knownInfected"
+                "Known Infected" : "knownInfected",
+                "Total Cases" : "totalInfected"
             }
         )
 
